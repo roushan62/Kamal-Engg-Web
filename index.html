@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BuilderMax Construction | Building Dreams with Strength & Precision</title>
+    <!-- Bootstrap 4 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <style>
+        :root {
+            --navy-blue: #0B1A42;
+            --construction-yellow: #FFC107;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+            --dark-gray: #6C757D;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+        }
+        
+        /* Header & Navigation */
+        .navbar {
+            background-color: transparent;
+            padding: 15px 0;
+            transition: all 0.4s ease;
+        }
+        
+        .navbar.scrolled {
+            background-color: var(--navy-blue);
+            padding: 10px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .navbar-brand {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: var(--white) !important;
+        }
+        
+        .navbar-brand span {
+            color: var(--construction-yellow);
+        }
+        
+        .navbar-nav .nav-link {
+            color: var(--white) !important;
+            font-weight: 500;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+        
+        .navbar-nav .nav-link:hover {
+            color: var(--construction-yellow) !important;
+        }
+        
+        .navbar-toggler {
+            border: none;
+        }
+        
+        .navbar-toggler:focus {
+            outline: none;
+        }
+        
+        .quote-btn {
+            background-color: var(--construction-yellow);
+            color: var(--navy-blue);
+            border-radius: 30px;
+            padding: 8px 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .quote-btn:hover {
+            background-color: #e0a800;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 193, 7, 0.3);
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 193, 7, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(255, 193, 7, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 193, 7, 0);
+            }
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .carousel-item {
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .carousel-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(11, 26, 66, 0.8), rgba(11, 26, 66, 0.5));
+        }
+        
+        .carousel-caption {
+            top: 50%;
+            transform: translateY(-50%);
+            bottom: auto;
+            text-align: left;
+        }
+        
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            color: var(--white);
+        }
+        
+        .hero-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--white);
+            max-width: 600px;
+        }
+        
+        .hero-btn {
+            padding: 12px 30px;
+            border-radius: 30px;
+            font-weight: 600;
+            margin-right: 15px;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary-custom {
+            background-color: var(--construction-yellow);
+            border-color: var(--construction-yellow);
+            color: var(--navy-blue);
+        }
+        
+        .btn-primary-custom:hover {
+            background-color: #e0a800;
+            border-color: #e0a800;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-outline-custom {
+            border: 2px solid var(--white);
+            color: var(--white);
+        }
+        
+        .btn-outline-custom:hover {
+            background-color: var(--white);
+            color: var(--navy-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--navy-blue);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70px;
+            height: 4px;
+            background-color: var(--construction-yellow);
+        }
+        
+        .section-subtitle {
+            color: var(--dark-gray);
+            margin-bottom: 60px;
+            max-width: 700px;
+        }
+        
+        .feature-box {
+            background-color: var(--white);
+            padding: 40px 30px;
+            border-radius: 10px;
+            text-align: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
+        }
+        
+        .feature-box:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            background-color: var(--construction-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            font-size: 30px;
+            color: var(--navy-blue);
+        }
+        
+        .feature-title {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--navy-blue);
+        }
+        
+        /* About Section */
+        .about-section {
+            padding: 100px 0;
+        }
+        
+        .about-img {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-content {
+            padding-left: 50px;
+        }
+        
+        .nav-pills .nav-link {
+            background: none;
+            color: var(--navy-blue);
+            font-weight: 600;
+            padding: 10px 20px;
+            margin-right: 10px;
+            border-radius: 30px;
+            border: 2px solid var(--construction-yellow);
+        }
+        
+        .nav-pills .nav-link.active {
+            background-color: var(--construction-yellow);
+            color: var(--navy-blue);
+        }
+        
+        .tab-content {
+            padding-top: 20px;
+        }
+        
+        .video-btn {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background-color: var(--construction-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy-blue);
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+        
+        .video-btn:hover {
+            transform: translate(-50%, -50%) scale(1.1);
+            color: var(--navy-blue);
+        }
+        
+        /* Fun Facts Section */
+        .facts-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(11, 26, 66, 0.9), rgba(11, 26, 66, 0.9)), url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--white);
+        }
+        
+        .fact-box {
+            text-align: center;
+            padding: 30px 20px;
+        }
+        
+        .fact-icon {
+            font-size: 50px;
+            color: var(--construction-yellow);
+            margin-bottom: 20px;
+        }
+        
+        .counter {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        
+        .fact-title {
+            font-size: 1.2rem;
+            color: var(--white);
+        }
+        
+        /* Services Section */
+        .services-section {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-img {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .service-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .service-card:hover .service-img img {
+            transform: scale(1.1);
+        }
+        
+        .service-content {
+            padding: 25px;
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--construction-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: var(--navy-blue);
+        }
+        
+        .service-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--navy-blue);
+        }
+        
+        .read-more {
+            color: var(--construction-yellow);
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more i {
+            margin-left: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: var(--navy-blue);
+            text-decoration: none;
+        }
+        
+        .read-more:hover i {
+            transform: translateX(5px);
+        }
+        
+        /* Projects Section */
+        .projects-section {
+            padding: 100px 0;
+        }
+        
+        .project-filter {
+            margin-bottom: 40px;
+        }
+        
+        .filter-btn {
+            background: none;
+            border: 2px solid var(--construction-yellow);
+            color: var(--navy-blue);
+            padding: 8px 25px;
+            border-radius: 30px;
+            margin: 0 5px 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .filter-btn.active, .filter-btn:hover {
+            background-color: var(--construction-yellow);
+            color: var(--navy-blue);
+        }
+        
+        .project-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .project-img {
+            height: 300px;
+            overflow: hidden;
+        }
+        
+        .project-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent, rgba(11, 26, 66, 0.9));
+            display: flex;
+            align-items: flex-end;
+            padding: 30px;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .project-card:hover .project-img img {
+            transform: scale(1.1);
+        }
+        
+        .project-info h4 {
+            color: var(--white);
+            margin-bottom: 5px;
+        }
+        
+        .project-info p {
+            color: var(--construction-yellow);
+            margin-bottom: 0;
+        }
+        
+        .project-link {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 40px;
+            height: 40px;
+            background-color: var(--construction-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--navy-blue);
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.4s ease;
+        }
+        
+        .project-card:hover .project-link {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Testimonials Section */
+        .testimonials-section {
+            padding: 100px 0;
+            background: linear-gradient(rgba(11, 26, 66, 0.9), rgba(11, 26, 66, 0.9)), url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            color: var(--white);
+        }
+        
+        .testimonial-card {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 40px;
+            margin: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .client-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin: 0 auto 20px;
+            border: 3px solid var(--construction-yellow);
+        }
+        
+        .client-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            position: relative;
+        }
+        
+        .testimonial-text::before {
+            content: '\201C';
+            font-size: 60px;
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .client-name {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .client-position {
+            color: var(--construction-yellow);
+            font-size: 0.9rem;
+        }
+        
+        .rating {
+            color: var(--construction-yellow);
+            margin-bottom: 15px;
+        }
+        
+        /* Blog Section */
+        .blog-section {
+            padding: 100px 0;
+            background-color: var(--light-gray);
+        }
+        
+        .blog-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .blog-img {
+            height: 220px;
+            overflow: hidden;
+        }
+        
+        .blog-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-img img {
+            transform: scale(1.1);
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-meta {
+            display: flex;
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+            color: var(--dark-gray);
+        }
+        
+        .blog-meta span {
+            margin-right: 15px;
+        }
+        
+        .blog-meta i {
+            color: var(--construction-yellow);
+            margin-right: 5px;
+        }
+        
+        .blog-title {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            color: var(--navy-blue);
+        }
+        
+        /* CTA Section */
+        .cta-section {
+            padding: 80px 0;
+            background-color: var(--navy-blue);
+            color: var(--white);
+        }
+        
+        .cta-title {
+            font-size: 2.2rem;
+            margin-bottom: 20px;
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            padding: 100px 0;
+        }
+        
+        .contact-form {
+            background-color: var(--white);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .form-control {
+            padding: 12px 15px;
+            border-radius: 5px;
+            border: 1px solid #e0e0e0;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .form-control:focus {
+            border-color: var(--construction-yellow);
+            box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.25);
+        }
+        
+        .contact-info {
+            padding-left: 50px;
+        }
+        
+        .contact-item {
+            display: flex;
+            margin-bottom: 30px;
+        }
+        
+        .contact-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--construction-yellow);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            color: var(--navy-blue);
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+            color: var(--navy-blue);
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--navy-blue);
+            color: var(--white);
+            padding: 80px 0 0;
+        }
+        
+        .footer-logo {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 28px;
+            color: var(--white);
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+        
+        .footer-logo span {
+            color: var(--construction-yellow);
+        }
+        
+        .footer-about {
+            margin-bottom: 30px;
+        }
+        
+        .footer-title {
+            font-size: 1.3rem;
+            margin-bottom: 25px;
+            color: var(--white);
+            position: relative;
+        }
+        
+        .footer-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--construction-yellow);
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            transition: all 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--construction-yellow);
+            text-decoration: none;
+            padding-left: 5px;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-top: 20px;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            border-radius: 5px 0 0 5px;
+        }
+        
+        .newsletter-btn {
+            background-color: var(--construction-yellow);
+            color: var(--navy-blue);
+            border: none;
+            padding: 0 20px;
+            border-radius: 0 5px 5px 0;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .newsletter-btn:hover {
+            background-color: #e0a800;
+        }
+        
+        .social-icons {
+            display: flex;
+            margin-top: 25px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 10px;
+            color: var(--white);
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--construction-yellow);
+            color: var(--navy-blue);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 20px 0;
+            margin-top: 60px;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--construction-yellow);
+            color: var(--navy-blue);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+        
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            background-color: #e0a800;
+            color: var(--navy-blue);
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 991.98px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .about-content {
+                padding-left: 0;
+                margin-top: 40px;
+            }
+            
+            .contact-info {
+                padding-left: 0;
+                margin-top: 40px;
+            }
+        }
+        
+        @media (max-width: 767.98px) {
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .counter {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <nav class="navbar navbar-expand-lg fixed-top">
+            <div class="container">
+                <a class="navbar-brand" href="#">Builder<span>Max</span></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"><i class="fas fa-bars" style="color: #fff;"></i></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#home">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about">About</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Services
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="servicesDropdown">
+                                <a class="dropdown-item" href="#">Building Construction</a>
+                                <a class="dropdown-item" href="#">House Renovation</a>
+                                <a class="dropdown-item" href="#">Architecture Design</a>
+                                <a class="dropdown-item" href="#">Interior Design</a>
+                                <a class="dropdown-item" href="#">Fixing & Support</a>
+                                <a class="dropdown-item" href="#">Painting</a>
+                            </div>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="projectsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Projects
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="projectsDropdown">
+                                <a class="dropdown-item" href="#">Commercial</a>
+                                <a class="dropdown-item" href="#">Residential</a>
+                                <a class="dropdown-item" href="#">Renovation</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#team">Team</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#blog">Blog</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact</a>
+                        </li>
+                        <li class="nav-item ml-lg-2">
+                            <a class="btn quote-btn" href="#contact">Get a Quote</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="carousel-caption">
+                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">We Build Dreams with Strength and Precision</h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">25 Years of Excellence in Construction and Engineering</p>
+                        <div data-aos="fade-up" data-aos-delay="600">
+                            <a href="#about" class="btn hero-btn btn-primary-custom">Learn More</a>
+                            <a href="#contact" class="btn hero-btn btn-outline-custom">Get a Quote</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="carousel-caption">
+                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">Quality Construction You Can Trust</h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">Delivering Excellence in Every Project We Undertake</p>
+                        <div data-aos="fade-up" data-aos-delay="600">
+                            <a href="#about" class="btn hero-btn btn-primary-custom">Our Projects</a>
+                            <a href="#contact" class="btn hero-btn btn-outline-custom">Contact Us</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');">
+                    <div class="carousel-caption">
+                        <h1 class="hero-title" data-aos="fade-up" data-aos-delay="200">Innovative Solutions for Modern Construction</h1>
+                        <p class="hero-subtitle" data-aos="fade-up" data-aos-delay="400">Combining Tradition with Cutting-Edge Technology</p>
+                        <div data-aos="fade-up" data-aos-delay="600">
+                            <a href="#services" class="btn hero-btn btn-primary-custom">Our Services</a>
+                            <a href="#contact" class="btn hero-btn btn-outline-custom">Get Started</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features-section" id="features">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Why Choose BuilderMax</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">We combine expertise, quality materials, and innovative techniques to deliver exceptional construction results that stand the test of time.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <h3 class="feature-title">Expert Worker</h3>
+                        <p>Our skilled professionals bring years of experience and training to every project, ensuring quality workmanship.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-tools"></i>
+                        </div>
+                        <h3 class="feature-title">Quality Work</h3>
+                        <p>We use premium materials and follow industry best practices to deliver durable and aesthetically pleasing results.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="700">
+                    <div class="feature-box">
+                        <div class="feature-icon">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h3 class="feature-title">24/7 Support</h3>
+                        <p>Our dedicated support team is available around the clock to address any concerns and ensure client satisfaction.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about-section" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6" data-aos="fade-right">
+                    <div class="about-img position-relative">
+                        <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="About BuilderMax" class="img-fluid">
+                        <a href="#" class="video-btn" data-toggle="modal" data-target="#videoModal">
+                            <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-6" data-aos="fade-left">
+                    <div class="about-content">
+                        <h2 class="section-title">25 Years Experience in the Construction Industry</h2>
+                        <p class="mb-4">Since 1998, BuilderMax Construction has been a trusted name in the construction industry, delivering exceptional projects that exceed client expectations.</p>
+                        
+                        <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="pills-mission-tab" data-toggle="pill" href="#pills-mission" role="tab" aria-controls="pills-mission" aria-selected="true">Our Mission</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-vision-tab" data-toggle="pill" href="#pills-vision" role="tab" aria-controls="pills-vision" aria-selected="false">Our Vision</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="pills-values-tab" data-toggle="pill" href="#pills-values" role="tab" aria-controls="pills-values" aria-selected="false">Our Values</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="pills-tabContent">
+                            <div class="tab-pane fade show active" id="pills-mission" role="tabpanel" aria-labelledby="pills-mission-tab">
+                                <p>To deliver exceptional construction services through innovative solutions, quality craftsmanship, and unwavering commitment to client satisfaction.</p>
+                                <p>We strive to build lasting relationships with our clients by understanding their vision and translating it into reality with precision and expertise.</p>
+                            </div>
+                            <div class="tab-pane fade" id="pills-vision" role="tabpanel" aria-labelledby="pills-vision-tab">
+                                <p>To be the leading construction company recognized for excellence, innovation, and sustainable building practices across the region.</p>
+                                <p>We envision a future where our projects not only meet functional requirements but also contribute positively to the environment and communities we serve.</p>
+                            </div>
+                            <div class="tab-pane fade" id="pills-values" role="tabpanel" aria-labelledby="pills-values-tab">
+                                <p>Integrity, quality, safety, and innovation form the core of our values. We believe in transparent communication, ethical practices, and continuous improvement.</p>
+                                <p>Our team is committed to upholding these values in every project, ensuring we deliver results that stand the test of time.</p>
+                            </div>
+                        </div>
+                        
+                        <a href="#contact" class="btn btn-primary-custom mt-3">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fun Facts Section -->
+    <section class="facts-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="200">
+                    <div class="fact-box">
+                        <div class="fact-icon">
+                            <i class="fas fa-hard-hat"></i>
+                        </div>
+                        <div class="counter" data-count="109">0</div>
+                        <h4 class="fact-title">Expert Workers</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="fact-box">
+                        <div class="fact-icon">
+                            <i class="fas fa-smile"></i>
+                        </div>
+                        <div class="counter" data-count="485">0</div>
+                        <h4 class="fact-title">Happy Clients</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="600">
+                    <div class="fact-box">
+                        <div class="fact-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="counter" data-count="789">0</div>
+                        <h4 class="fact-title">Completed Projects</h4>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6" data-aos="fade-up" data-aos-delay="800">
+                    <div class="fact-box">
+                        <div class="fact-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="counter" data-count="890">0</div>
+                        <h4 class="fact-title">Running Projects</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Our Services</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">We offer a comprehensive range of construction services tailored to meet your specific needs and requirements.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Building Construction">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3 class="service-title">Building Construction</h3>
+                            <p>We specialize in constructing residential, commercial, and industrial buildings with precision and quality.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="House Renovation">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3 class="service-title">House Renovation</h3>
+                            <p>Transform your existing space with our professional renovation services that blend functionality and aesthetics.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Architecture Design">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-drafting-compass"></i>
+                            </div>
+                            <h3 class="service-title">Architecture Design</h3>
+                            <p>Our architectural team creates innovative designs that balance aesthetics, functionality, and sustainability.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Interior Design">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-couch"></i>
+                            </div>
+                            <h3 class="service-title">Interior Design</h3>
+                            <p>Create beautiful and functional interior spaces with our expert design services tailored to your style.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Fixing & Support">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3 class="service-title">Fixing & Support</h3>
+                            <p>We provide reliable maintenance and support services to keep your property in optimal condition.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="service-card">
+                        <div class="service-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Painting">
+                        </div>
+                        <div class="service-content">
+                            <div class="service-icon">
+                                <i class="fas fa-paint-roller"></i>
+                            </div>
+                            <h3 class="service-title">Painting</h3>
+                            <p>Enhance the beauty of your space with our professional painting services using premium quality materials.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Our Projects</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Explore our portfolio of successfully completed projects across various sectors and building types.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div class="project-filter text-center" data-aos="fade-up" data-aos-delay="300">
+                        <button class="filter-btn active" data-filter="*">All Projects</button>
+                        <button class="filter-btn" data-filter=".commercial">Commercial</button>
+                        <button class="filter-btn" data-filter=".residential">Residential</button>
+                        <button class="filter-btn" data-filter=".renovation">Renovation</button>
+                    </div>
+                </div>
+            </div>
+            <div class="row project-grid">
+                <div class="col-lg-4 col-md-6 project-item commercial" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Commercial Building">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h4>Corporate Office Complex</h4>
+                                <p>Commercial</p>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link" data-toggle="modal" data-target="#projectModal1">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 project-item residential" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Residential Building">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h4>Modern Family Home</h4>
+                                <p>Residential</p>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link" data-toggle="modal" data-target="#projectModal2">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 project-item renovation" data-aos="fade-up" data-aos-delay="600">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Renovation Project">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h4>Heritage Building Restoration</h4>
+                                <p>Renovation</p>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link" data-toggle="modal" data-target="#projectModal3">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 project-item commercial" data-aos="fade-up" data-aos-delay="400">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Commercial Building">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h4>Shopping Mall Development</h4>
+                                <p>Commercial</p>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link" data-toggle="modal" data-target="#projectModal4">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 project-item residential" data-aos="fade-up" data-aos-delay="500">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Residential Building">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h4>Luxury Apartment Complex</h4>
+                                <p>Residential</p>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link" data-toggle="modal" data-target="#projectModal5">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 project-item renovation" data-aos="fade-up" data-aos-delay="600">
+                    <div class="project-card">
+                        <div class="project-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Renovation Project">
+                        </div>
+                        <div class="project-overlay">
+                            <div class="project-info">
+                                <h4>Office Space Modernization</h4>
+                                <p>Renovation</p>
+                            </div>
+                        </div>
+                        <a href="#" class="project-link" data-toggle="modal" data-target="#projectModal6">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section" id="testimonials">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title text-white" data-aos="fade-up">What Our Clients Say</h2>
+                    <p class="section-subtitle text-white" data-aos="fade-up" data-aos-delay="200">We take pride in our work and the relationships we build with our clients. Here's what they have to say about us.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="testimonial-card">
+                                    <div class="client-img">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Client">
+                                    </div>
+                                    <div class="testimonial-text">
+                                        <p>BuilderMax delivered our corporate office project ahead of schedule and within budget. Their attention to detail and professionalism throughout the process was impressive.</p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <h4 class="client-name">Robert Johnson</h4>
+                                    <p class="client-position">CEO, TechCorp Inc.</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-card">
+                                    <div class="client-img">
+                                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Client">
+                                    </div>
+                                    <div class="testimonial-text">
+                                        <p>We hired BuilderMax for our home renovation, and we couldn't be happier with the results. The team was respectful, clean, and highly skilled. They transformed our outdated house into a modern dream home.</p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <h4 class="client-name">Sarah Williams</h4>
+                                    <p class="client-position">Homeowner</p>
+                                </div>
+                            </div>
+                            <div class="carousel-item">
+                                <div class="testimonial-card">
+                                    <div class="client-img">
+                                        <img src="https://randomuser.me/api/portraits/men/76.jpg" alt="Client">
+                                    </div>
+                                    <div class="testimonial-text">
+                                        <p>As a property developer, I've worked with many construction companies, but BuilderMax stands out for their reliability, quality work, and excellent communication. I highly recommend them.</p>
+                                    </div>
+                                    <div class="rating">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <h4 class="client-name">Michael Thompson</h4>
+                                    <p class="client-position">Property Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="carousel-control-prev" href="#testimonialCarousel" role="button" data-slide="prev">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                        <a class="carousel-control-next" href="#testimonialCarousel" role="button" data-slide="next">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section class="blog-section" id="blog">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Latest From Our Blog</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Stay updated with the latest trends, tips, and insights from the construction industry.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="300">
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blog Post">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> June 15, 2023</span>
+                                <span><i class="far fa-user"></i> Admin</span>
+                            </div>
+                            <h3 class="blog-title">Sustainable Building Materials for Modern Construction</h3>
+                            <p>Discover the latest eco-friendly materials that are revolutionizing the construction industry and reducing environmental impact.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="400">
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blog Post">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> May 28, 2023</span>
+                                <span><i class="far fa-user"></i> Admin</span>
+                            </div>
+                            <h3 class="blog-title">Maximizing Space in Small Residential Projects</h3>
+                            <p>Learn innovative design strategies to make the most of limited space in urban residential construction projects.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6" data-aos="fade-up" data-aos-delay="500">
+                    <div class="blog-card">
+                        <div class="blog-img">
+                            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Blog Post">
+                        </div>
+                        <div class="blog-content">
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar-alt"></i> April 12, 2023</span>
+                                <span><i class="far fa-user"></i> Admin</span>
+                            </div>
+                            <h3 class="blog-title">The Future of Smart Homes and Building Automation</h3>
+                            <p>Explore how technology is transforming residential construction with integrated smart home systems and automation.</p>
+                            <a href="#" class="read-more">Read More <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12 text-center mt-5" data-aos="fade-up">
+                    <a href="#" class="btn btn-primary-custom">View All Posts</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="row justify-content-center text-center">
+                <div class="col-lg-8" data-aos="fade-up">
+                    <h2 class="cta-title">Ready to Start Your Next Project? Let's Build Together!</h2>
+                    <a href="#contact" class="btn hero-btn btn-primary-custom">Get a Free Quote</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+                    <p class="section-subtitle" data-aos="fade-up" data-aos-delay="200">Have a project in mind? Contact us today for a free consultation and quote.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8" data-aos="fade-right">
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" class="form-control" placeholder="Your Email" required>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-md-6">
+                                    <input type="tel" class="form-control" placeholder="Your Phone">
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="text" class="form-control" placeholder="Subject">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12">
+                                    <textarea class="form-control" rows="5" placeholder="Your Message" required></textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-12 text-center">
+                                    <button type="submit" class="btn btn-primary-custom mt-3">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="col-lg-4" data-aos="fade-left">
+                    <div class="contact-info">
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Our Location</h4>
+                                <p>123 Construction Avenue, Building City, BC 12345</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-phone-alt"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Phone Number</h4>
+                                <p>+1 (555) 123-4567</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Email Address</h4>
+                                <p>info@buildermax.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="contact-details">
+                                <h4>Working Hours</h4>
+                                <p>Mon - Fri: 8:00 AM - 6:00 PM</p>
+                                <p>Sat: 9:00 AM - 4:00 PM</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6">
+                    <a href="#" class="footer-logo">Builder<span>Max</span></a>
+                    <p class="footer-about">BuilderMax Construction has been delivering exceptional construction services for over 25 years. We combine expertise, quality materials, and innovative techniques to bring your vision to life.</p>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#services">Our Services</a></li>
+                        <li><a href="#projects">Projects</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="footer-title">Our Services</h4>
+                    <ul class="footer-links list-unstyled">
+                        <li><a href="#">Building Construction</a></li>
+                        <li><a href="#">House Renovation</a></li>
+                        <li><a href="#">Architecture Design</a></li>
+                        <li><a href="#">Interior Design</a></li>
+                        <li><a href="#">Fixing & Support</a></li>
+                        <li><a href="#">Painting</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6">
+                    <h4 class="footer-title">Newsletter</h4>
+                    <p>Subscribe to our newsletter to get updates on our latest projects and industry insights.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Your Email">
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="row">
+                    <div class="col-md-6">
+                        <p class="mb-0">© 2023 BuilderMax Construction. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <a href="#" class="text-white mr-3">Privacy Policy</a>
+                        <a href="#" class="text-white">Terms of Service</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top"><i class="fas fa-chevron-up"></i></a>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/9xwazD5SyVg" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Project Modals -->
+    <div class="modal fade" id="projectModal1" tabindex="-1" role="dialog" aria-labelledby="projectModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="projectModal1Label">Corporate Office Complex</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Project" class="img-fluid mb-3">
+                    <p>This state-of-the-art corporate office complex was designed to provide a modern and efficient workspace for a leading technology company. The project involved constructing a 12-story building with advanced amenities, sustainable features, and innovative architectural elements.</p>
+                    <p><strong>Project Details:</strong></p>
+                    <ul>
+                        <li>Location: Downtown Business District</li>
+                        <li>Size: 150,000 sq. ft.</li>
+                        <li>Duration: 18 months</li>
+                        <li>Completion: March 2023</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!-- Custom JS -->
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // Navbar background change on scroll
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > 50) {
+                $('.navbar').addClass('scrolled');
+            } else {
+                $('.navbar').removeClass('scrolled');
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        $('a[href*="#"]').on('click', function(e) {
+            e.preventDefault();
+            $('html, body').animate(
+                {
+                    scrollTop: $($(this).attr('href')).offset().top - 70,
+                },
+                500,
+                'linear'
+            );
+        });
+
+        // Back to top button
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 300) {
+                $('.back-to-top').addClass('active');
+            } else {
+                $('.back-to-top').removeClass('active');
+            }
+        });
+
+        $('.back-to-top').click(function() {
+            $('html, body').animate({scrollTop: 0}, 500);
+            return false;
+        });
+
+        // Counter animation
+        function animateCounter() {
+            $('.counter').each(function() {
+                var $this = $(this);
+                var countTo = $this.attr('data-count');
+                
+                $({ countNum: 0 }).animate({
+                    countNum: countTo
+                }, {
+                    duration: 2000,
+                    easing: 'swing',
+                    step: function() {
+                        $this.text(Math.floor(this.countNum));
+                    },
+                    complete: function() {
+                        $this.text(this.countNum);
+                    }
+                });
+            });
+        }
+
+        // Check if counter element is in viewport
+        function isElementInViewport(el) {
+            var rect = el.getBoundingClientRect();
+            return (
+                rect.top >= 0 &&
+                rect.left >= 0 &&
+                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+            );
+        }
+
+        // Animate counter when scrolled into view
+        var countersAnimated = false;
+        $(window).scroll(function() {
+            if (!countersAnimated && isElementInViewport(document.querySelector('.counter'))) {
+                animateCounter();
+                countersAnimated = true;
+            }
+        });
+
+        // Project filtering
+        $('.filter-btn').on('click', function() {
+            $('.filter-btn').removeClass('active');
+            $(this).addClass('active');
+            
+            var filterValue = $(this).attr('data-filter');
+            $('.project-item').hide();
+            $(filterValue).show();
+        });
+
+        // Contact form submission
+        $('#contactForm').on('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! We will get back to you soon.');
+            $('#contactForm')[0].reset();
+        });
+
+        // Newsletter form submission
+        $('.newsletter-form').on('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            $('.newsletter-input').val('');
+        });
+    </script>
+</body>
+</html>
