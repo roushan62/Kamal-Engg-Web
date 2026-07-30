@@ -12,7 +12,7 @@ A modern, safety-focused B2B industrial services website built with Next.js 16 (
 - **Styling:** Tailwind CSS v4
 - **Animations:** Framer Motion (scroll-based reveals, subtle transitions)
 - **Deployment:** Vercel (serverless) via GitHub
-- **Contact Form:** Serverless API route (`/api/contact`) — ready for Formspree/Resend integration
+- **Contact Form:** Vercel serverless API route (`/api/contact`) with email delivery via Web3Forms (free), Resend, or Formspree
 
 ## Project Structure
 
@@ -122,24 +122,35 @@ Open [http://localhost:3000](http://localhost:3000).
 
 ## Deployment (Vercel)
 
-1. Push to GitHub
-2. Import repo in Vercel
-3. Set environment variables (optional):
-   - `RESEND_API_KEY` — for email delivery
-4. Deploy
+This project is ready for GitHub → Vercel deployment. No separate backend server is needed; Vercel runs `src/app/api/contact/route.ts` as a serverless function.
+
+1. Push/import this GitHub repo in Vercel.
+2. In Vercel, open **Project Settings → Environment Variables**.
+3. Add the contact form variables from `.env.example`:
+   - `CONTACT_TO_EMAIL=sales.kamalengg01@gmail.com`
+   - `WEB3FORMS_ACCESS_KEY=your_free_web3forms_key`
+4. Redeploy the project.
+5. Test `/contact` by submitting the form. The enquiry should arrive at the configured email.
 
 ## Contact Form Integration
 
-The contact form at `/api/contact` currently logs submissions and returns success. To integrate email delivery:
+The contact form posts to `/api/contact` and the serverless route sends the enquiry email. The route now returns an error if no email service is configured, so submissions are not shown as successful unless delivery is actually attempted through a configured provider.
 
-**Option 1: Resend (recommended)**
-```bash
-npm install resend
-```
-Uncomment the Resend code block in `src/app/api/contact/route.ts` and add `RESEND_API_KEY` env var.
+### Recommended free setup: Web3Forms
 
-**Option 2: Formspree**
-Replace the fetch URL in `ContactForm.tsx` with your Formspree endpoint.
+1. Go to [Web3Forms](https://web3forms.com/) and create a free access key for `sales.kamalengg01@gmail.com`.
+2. Add the key in Vercel as `WEB3FORMS_ACCESS_KEY`.
+3. Keep `CONTACT_TO_EMAIL` set to the email address where leads should arrive.
+4. Redeploy and test the contact form.
+
+### Optional alternatives
+
+The same `/api/contact` route also supports these environment variables if you prefer another provider:
+
+- `RESEND_API_KEY` and optional `CONTACT_FROM_EMAIL`
+- `FORMSPREE_FORM_ID` or `FORMSPREE_ENDPOINT`
+
+No frontend code change is required for any of these providers.
 
 ## Design Notes
 

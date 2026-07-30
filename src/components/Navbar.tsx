@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { NAV_LINKS, COMPANY } from "@/lib/constants";
@@ -16,9 +16,7 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  useEffect(() => {
-    setIsOpen(false);
-  }, [pathname]);
+  const closeMobileMenu = () => setIsOpen(false);
 
   const isActive = (href: string) => {
     if (href === "/") return pathname === "/";
@@ -36,7 +34,7 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          <Link href="/" className="flex items-center gap-3 group" onClick={closeMobileMenu}>
             <img
               src="/Kamal Engg Logo.png"
               alt={COMPANY.name}
@@ -114,6 +112,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
+                  onClick={closeMobileMenu}
                   className={`px-4 py-2.5 rounded-md text-sm font-medium transition-all ${
                     isActive(link.href)
                       ? "text-safety bg-safety/5"
@@ -125,6 +124,7 @@ export default function Navbar() {
               ))}
               <Link
                 href="/contact"
+                onClick={closeMobileMenu}
                 className="mt-2 mx-4 px-5 py-2.5 rounded-md text-sm font-semibold text-center bg-safety text-steel-dark hover:bg-safety-600 transition-all"
               >
                 Get a Quote →

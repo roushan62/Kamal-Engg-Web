@@ -7,7 +7,6 @@ import CTABanner from "@/components/CTABanner";
 import ServiceCard from "@/components/ServiceCard";
 import IndustryCard from "@/components/IndustryCard";
 import PlaceholderImage from "@/components/PlaceholderImage";
-import { COMPANY, STATS } from "@/lib/constants";
 import { services } from "@/data/services";
 import { differentiators, safetyStandards, clientIndustries } from "@/data/content";
 import { industries as allIndustries } from "@/data/content";

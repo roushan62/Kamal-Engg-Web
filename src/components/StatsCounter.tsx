@@ -14,11 +14,11 @@ function AnimatedCounter({
   const [count, setCount] = useState(0);
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const hasAnimated = useRef(false);
 
   useEffect(() => {
-    if (isInView && !hasAnimated) {
-      setHasAnimated(true);
+    if (isInView && !hasAnimated.current) {
+      hasAnimated.current = true;
       const duration = 2000;
       const steps = 60;
       const increment = value / steps;
@@ -34,7 +34,7 @@ function AnimatedCounter({
       }, duration / steps);
       return () => clearInterval(timer);
     }
-  }, [isInView, hasAnimated, value]);
+  }, [isInView, value]);
 
   return (
     <span ref={ref} className="text-3xl sm:text-4xl lg:text-5xl font-bold text-safety">
