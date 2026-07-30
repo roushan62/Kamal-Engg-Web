@@ -1,0 +1,151 @@
+import type { ServiceItem } from "@/lib/types";
+
+export const services: ServiceItem[] = [
+  {
+    id: "erection-dismantling",
+    title: "Scaffolding Erection & Dismantling",
+    subtitle: "Full-Cycle Scaffolding Lifecycle Management",
+    icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+    description:
+      "We provide end-to-end scaffolding erection and dismantling services — from initial site survey and structural planning to safe dismantling and material recovery. Our trained erection crew ensures every scaffold structure is built to load specifications with proper bracing, anchoring, and tie-off points.",
+    useCases: [
+      "Building facades for new construction & renovation",
+      "Industrial plant maintenance and shutdowns",
+      "Bridge and infrastructure access solutions",
+      "Temporary access for inspection and painting",
+    ],
+    specifications: [
+      "IS 3696 (Part 1) compliant erection practices",
+      "Load calculation and structural verification before erection",
+      "Pre-use inspection of all material before deployment",
+      "Supervised dismantling with material sorting and recovery",
+    ],
+    features: [
+      "Dedicated site supervisor for every project",
+      "Toolbox talk and safety briefing before erection begins",
+      "PPE compliance for all crew members",
+      "Flexible mobilization — minimum lead time for urgent requirements",
+    ],
+    imageLabel: "[SITE PHOTO: Scaffolding crew during erection at project site]",
+    src: "/images/service-erection.jpg",
+  },
+  {
+    id: "h-frame",
+    title: "H-Frame Scaffolding",
+    subtitle: "Modular Frame System for Building Construction",
+    icon: "M4 5a1 1 0 011-1h4a1 1 0 011 1v7h4V5a1 1 0 011-1h4a1 1 0 011 1v14M4 19h16",
+    description:
+      "H-Frame scaffolding is one of the most widely used modular scaffolding systems in the construction industry. Comprising welded H-shaped frames connected with cross braces and planks, this system offers rapid assembly and excellent stability for mid-rise structures. It is ideal for bricklaying, plastering, painting, and facade finishing work.",
+    useCases: [
+      "Building facades for brickwork and plastering",
+      "Painting and exterior finishing for mid-rise structures",
+      "Residential and commercial building construction",
+      "Renovation and repair access for occupied buildings",
+    ],
+    specifications: [
+      "Standard frame sizes: 1.5m (W) × 1.2m / 1.5m / 1.8m (H)",
+      "MS tubular construction with welded joints",
+      "Cross bracing with drop-forged couplers",
+      "Galvanized finish for corrosion resistance",
+      "Compatible with standard steel planks and timber boards",
+    ],
+    features: [
+      "Fast assembly — fewer components than tube & coupler systems",
+      "Cost-effective for straight-line facades",
+      "High rigidity and load-bearing capacity",
+      "Easy to transport and stack for multi-location deployment",
+    ],
+    imageLabel: "[PROJECT PHOTO: H-Frame scaffolding on building facade]",
+    src: "/images/service-hframe.jpg",
+  },
+  {
+    id: "tubular",
+    title: "Tubular (Tube & Coupler) Scaffolding",
+    subtitle: "Flexible System for Complex and Irregular Structures",
+    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    description:
+      "Tube and coupler scaffolding is the most versatile scaffolding system available. Using steel tubes connected with right-angle, swivel, and sleeve couplers, this system can be configured to virtually any geometry — making it the go-to choice for industrial plants, bridges, chimneys, and structures with irregular shapes. The system's flexibility allows adaption to any layout without compromising on load-bearing capacity.",
+    useCases: [
+      "Industrial plants with complex piping and equipment layouts",
+      "Bridges, flyovers, and infrastructure projects",
+      "Refineries, power plants, and chemical facilities",
+      "Heritage structures and architecturally complex buildings",
+      "Stadiums and large-span structures",
+    ],
+    specifications: [
+      "48.3mm OD × 3.2mm / 4.0mm wall thickness MS/GI tubes",
+      "Drop-forged or pressed steel couplers (BS 1139 / IS 2750 compliant)",
+      "Right-angle, swivel, and sleeve couplers for any angle connection",
+      "Load capacity: up to 6.25 kN per leg (standard configuration)",
+      "Tube lengths: 0.5m to 6.4m (standard), custom lengths available",
+    ],
+    features: [
+      "Adaptable to any geometry — irregular shapes, curves, slopes",
+      "Component-level inspection and replacement possible",
+      "Heavy-duty load capacity for industrial applications",
+      "Compatible with other systems for hybrid scaffolding solutions",
+    ],
+    imageLabel: "[PROJECT PHOTO: Tubular scaffolding at industrial plant or bridge]",
+    src: "/images/service-tubular.jpg",
+  },
+  {
+    id: "cuplock",
+    title: "Cuplock Scaffolding",
+    subtitle: "Heavy-Duty System for High-Rise & Industrial Applications",
+    icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
+    description:
+      "Cuplock scaffolding is a heavy-duty, high-capacity system designed for demanding applications including high-rise construction, industrial shutdowns, and load-bearing formwork support. The unique cup-and-blade locking mechanism allows up to 4 horizontals to be connected at a single node point, providing unmatched speed of erection and structural integrity with fewer loose components.",
+    useCases: [
+      "High-rise building construction and facade work",
+      "Industrial shutdown and maintenance access",
+      "Formwork shuttering support for heavy concrete pours",
+      "Staircase towers, loading bays, and access towers",
+      "Petrochemical, power, and steel plant applications",
+    ],
+    specifications: [
+      "Standard vertical standards: 48.3mm OD × 3.2mm / 4.0mm wall thickness",
+      "Unique top-cup and bottom-cup node point locking mechanism",
+      "Ledger blade ends forged for secure cup engagement",
+      "Load capacity: 40 kN per vertical standard (braced at 2m intervals)",
+      "Bay sizes: 0.6m to 2.4m (lift height), 0.6m to 3.0m (bay length)",
+      "Hot-dip galvanized finish standard",
+    ],
+    features: [
+      "4-way connection at every node — no loose fittings",
+      "40% faster erection compared to tube & coupler systems",
+      "Highest load capacity among modular scaffolding systems",
+      "Reduced material inventory — fewer components needed",
+    ],
+    imageLabel: "[PROJECT PHOTO: Cuplock scaffolding at high-rise or industrial site]",
+    src: "/images/service-cuplock.jpg",
+  },
+  {
+    id: "supply-service",
+    title: "Scaffolding Supply & Service (Rent / Sale)",
+    subtitle: "Material Supply with On-Site Technical Support",
+    icon: "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4",
+    description:
+      "We supply a comprehensive range of scaffolding materials on rental or outright sale basis, supported by our technical team for on-site guidance. Our inventory includes H-Frames, MS/ GI tubes, couplers of all types, cuplock components, steel planks, base jacks, and all accessories. Every item undergoes quality inspection before dispatch, and our technical team is available for installation support at your site.",
+    useCases: [
+      "Contractors needing material only (self-execution with own labor)",
+      "Short-term project requirements with flexible rental periods",
+      "Material top-up for ongoing projects running short of stock",
+      "Purchase of new scaffolding material for long-term asset building",
+    ],
+    specifications: [
+      "Full range: H-Frames, tubes (MS/GI), couplers, cuplock standards & ledgers",
+      "Steel planks (225mm & 450mm widths), base jacks, U-head jacks",
+      "All material inspected and tagged before dispatch",
+      "Rental: flexible periods — weekly, monthly, or project-duration basis",
+      "Sale: competitive pricing with bulk-order discounts",
+    ],
+    features: [
+      "Delivery to project site across operational regions",
+      "On-site technical support for correct installation",
+      "Material maintenance, repair, and refurbishment service",
+      "Inventory availability updates for quick lead-time confirmation",
+    ],
+    imageLabel: "[SITE PHOTO: Scaffolding material yard / inventory display]",
+    src: "/images/service-rent-sale.jpg",
+  },
+];
