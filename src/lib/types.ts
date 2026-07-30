@@ -1,25 +1,29 @@
+export type Discipline = "Scaffolding" | "Painting" | "Insulation";
+
 export interface ServiceItem {
   id: string;
+  slug: string;
+  discipline: Discipline;
   title: string;
-  subtitle: string;
-  icon: string;
+  short: string;
   description: string;
-  useCases: string[];
-  specifications: string[];
+  icon: string;
+  image: string;
   features: string[];
-  imageLabel: string;
-  src?: string;
+  bestFor: string[];
+  specs?: Array<{ label: string; value: string }>;
 }
 
 export interface ProjectItem {
   id: string;
   title: string;
   category: string;
-  scaffoldingType: string;
+  discipline: Discipline | "Multi-discipline";
+  scope: string;
   location: string;
   description: string;
-  imageLabel: string;
-  src?: string;
+  highlights: string[];
+  src: string;
 }
 
 export interface IndustryItem {
@@ -31,19 +35,13 @@ export interface IndustryItem {
 }
 
 export interface FAQItem {
-  id: string;
   question: string;
   answer: string;
+  category: string;
 }
 
-export interface TeamMember {
+export interface MaterialItem {
   name: string;
-  role: string;
-  phone: string;
-  department: string;
-}
-
-export interface NavLink {
-  label: string;
-  href: string;
+  spec: string;
+  group: string;
 }

@@ -1,302 +1,571 @@
-import type { ProjectItem, IndustryItem, FAQItem } from "@/lib/types";
+import type { ProjectItem, IndustryItem, FAQItem, MaterialItem } from "@/lib/types";
+
+/* ------------------------------------------------------------------ */
+/*  PROJECTS                                                           */
+/* ------------------------------------------------------------------ */
 
 export const projects: ProjectItem[] = [
   {
     id: "p1",
-    title: "Industrial Plant Shutdown Scaffolding",
-    category: "Industrial",
-    scaffoldingType: "Cuplock",
-    location: "Cement Plant, Madhya Pradesh",
-    description: "Full-scale cuplock scaffolding for 15-day planned shutdown maintenance covering preheater tower, cooler section, and ducting access.",
-    imageLabel: "[PROJECT PHOTO: Cuplock scaffolding at cement plant shutdown]",
-    src: "/images/project-cement.jpg",
+    title: "Refinery Turnaround Access Package",
+    category: "Oil & Gas",
+    discipline: "Scaffolding",
+    scope: "Cuplock + Tube & Coupler",
+    location: "Refinery Complex, Gujarat",
+    description:
+      "Multi-level cuplock access around distillation columns and pipe racks for a planned turnaround, with tube & coupler infills where geometry did not permit modular bays.",
+    highlights: [
+      "Staircase towers for safe multi-level access",
+      "Erected and handed over under client work permit system",
+      "Sequenced dismantling on shutdown completion",
+    ],
+    src: "/images/project-refinery.jpg",
   },
   {
     id: "p2",
-    title: "Commercial Building Facade Work",
-    category: "Commercial",
-    scaffoldingType: "H-Frame",
-    location: "Commercial Complex, Uttar Pradesh",
-    description: "H-Frame scaffolding system deployed for brickwork and plastering on a G+5 commercial building with 200m running facade.",
-    imageLabel: "[PROJECT PHOTO: H-Frame scaffolding on commercial building facade]",
-    src: "/images/project-facade.jpg",
+    title: "Cement Plant Preheater Shutdown",
+    category: "Cement",
+    discipline: "Scaffolding",
+    scope: "Cuplock Scaffolding",
+    location: "Cement Plant, Western India",
+    description:
+      "Full-height cuplock scaffolding across preheater tower, cooler section and ducting for a time-bound maintenance shutdown, mobilised at short notice.",
+    highlights: [
+      "Access at multiple cyclone stages",
+      "Working platforms with guardrails and toe boards",
+      "Daily scaffold inspection register maintained",
+    ],
+    src: "/images/project-cement.jpg",
   },
   {
     id: "p3",
-    title: "Bridge Inspection & Repair Access",
-    category: "Infrastructure",
-    scaffoldingType: "Tubular (Tube & Coupler)",
-    location: "Highway Bridge Project, Rajasthan",
-    description: "Custom tubular scaffolding configuration for bridge pier and deck soffit access during structural inspection and repair works.",
-    imageLabel: "[PROJECT PHOTO: Tubular scaffolding under bridge deck]",
-    src: "/images/project-bridge.jpg",
+    title: "Storage Tank Painting & Access",
+    category: "Chemical",
+    discipline: "Multi-discipline",
+    scope: "Scaffolding + Protective Painting",
+    location: "Tank Farm, Gujarat",
+    description:
+      "Ring scaffolding around a crude storage tank followed by surface preparation and a three-coat epoxy-PU protective system on the shell and roof.",
+    highlights: [
+      "Power tool cleaning to St 3 before priming",
+      "Three-coat system with DFT recorded per coat",
+      "Containment sheeting to control overspray",
+    ],
+    src: "/images/project-tank.jpg",
   },
   {
     id: "p4",
-    title: "High-Rise Residential Tower",
-    category: "Residential",
-    scaffoldingType: "Cuplock",
-    location: "Residential Tower, NCR",
-    description: "Cuplock scaffolding for G+18 residential tower construction — external access, material loading bays, and staircase towers.",
-    imageLabel: "[PROJECT PHOTO: Cuplock scaffolding on high-rise residential tower]",
-    src: "/images/project-residential.jpg",
+    title: "Process Piping Insulation & Cladding",
+    category: "Petrochemical",
+    discipline: "Insulation",
+    scope: "Hot Insulation + Aluminium Cladding",
+    location: "Petrochemical Plant, Gujarat",
+    description:
+      "Rockwool hot insulation on process and steam lines with aluminium sheet cladding, including bird-mouthed elbows and removable box covers at valves and flanges.",
+    highlights: [
+      "Cladding fabricated and formed on site",
+      "Banding at specified pitch with sealed overlaps",
+      "Removable covers at all inspection points",
+    ],
+    src: "/images/service-insulation.jpg",
   },
   {
     id: "p5",
-    title: "Warehouse Construction Support",
-    category: "Industrial",
-    scaffoldingType: "H-Frame + Tubular",
-    location: "Logistics Park, Haryana",
-    description: "Hybrid H-Frame and tubular scaffolding for PEB warehouse construction — roof work access, mezzanine installation support.",
-    imageLabel: "[PROJECT PHOTO: Scaffolding at warehouse construction site]",
+    title: "Commercial Facade Access",
+    category: "Building Construction",
+    discipline: "Scaffolding",
+    scope: "H-Frame Scaffolding",
+    location: "Commercial Complex, Surat",
+    description:
+      "H-Frame scaffolding along a long running facade for external plastering, putty and painting works on a multi-storey commercial building.",
+    highlights: [
+      "Fast stacking on a repetitive straight run",
+      "Full decking with MS challi at every lift",
+      "Progressive raise following the finishing sequence",
+    ],
+    src: "/images/project-facade.jpg",
   },
   {
     id: "p6",
-    title: "Power Plant Boiler Area Access",
+    title: "Bridge Soffit Inspection Access",
+    category: "Infrastructure",
+    discipline: "Scaffolding",
+    scope: "Tube & Coupler",
+    location: "Highway Bridge, Western India",
+    description:
+      "Suspended and underslung tube & coupler scaffolding for pier and deck soffit access during structural inspection and repair works.",
+    highlights: [
+      "Cantilever brackets off existing structure",
+      "Continuous deck for inspection team access",
+      "Traffic-side protection sheeting",
+    ],
+    src: "/images/project-bridge.jpg",
+  },
+  {
+    id: "p7",
+    title: "High-Rise Residential Tower",
+    category: "Building Construction",
+    discipline: "Scaffolding",
+    scope: "Cuplock Scaffolding",
+    location: "Residential Tower Project",
+    description:
+      "Cuplock external access, material loading bays and dedicated staircase towers for a high-rise residential tower through the structure and finishing phases.",
+    highlights: [
+      "Loading bays at alternate levels",
+      "Tied back to structure at specified intervals",
+      "Climbing lifts in step with slab casting",
+    ],
+    src: "/images/project-residential.jpg",
+  },
+  {
+    id: "p8",
+    title: "Structural Steel Protective Coating",
     category: "Industrial",
-    scaffoldingType: "Tubular (Tube & Coupler)",
-    location: "Thermal Power Plant, Chhattisgarh",
-    description: "Complex tubular scaffolding around boiler drum area, economizer, and ducting with multiple working levels for refractory work.",
-    imageLabel: "[PROJECT PHOTO: Tubular scaffolding in power plant boiler area]",
+    discipline: "Painting",
+    scope: "Surface Prep + Epoxy System",
+    location: "Manufacturing Plant, Gujarat",
+    description:
+      "Surface preparation and anti-corrosive coating of structural steelwork and pipe racks, executed alongside running plant operations under permit.",
+    highlights: [
+      "Work sequenced around live plant areas",
+      "Airless spray with brush touch-up at connections",
+      "Coating history documented for handover",
+    ],
+    src: "/images/service-painting.jpg",
   },
 ];
 
+export const projectCategories = [
+  "All",
+  "Oil & Gas",
+  "Petrochemical",
+  "Chemical",
+  "Cement",
+  "Industrial",
+  "Infrastructure",
+  "Building Construction",
+];
+
+/* ------------------------------------------------------------------ */
+/*  CLIENTS — end-users served through principal contractors           */
+/* ------------------------------------------------------------------ */
+
+export const CLIENT_NOTE =
+  "Kamal Engineering has executed scaffolding, painting and insulation work as a specialist sub-contractor at plants and project sites of the following organisations, engaged through their principal contractors.";
+
+export const clients: Array<{ name: string; sector: string }> = [
+  { name: "Reliance", sector: "Refining & Petrochemicals" },
+  { name: "Adani", sector: "Ports, Power & Infrastructure" },
+  { name: "IOCL", sector: "Refining & Marketing" },
+  { name: "AM/NS India", sector: "Steel" },
+  { name: "L&T", sector: "EPC & Construction" },
+  { name: "Tata Projects", sector: "EPC & Construction" },
+  { name: "Aditya Birla Group", sector: "Diversified Manufacturing" },
+  { name: "Ambuja", sector: "Cement" },
+  { name: "Atul Ltd", sector: "Chemicals" },
+  { name: "Perstorp", sector: "Specialty Chemicals" },
+  { name: "Aarti Industries", sector: "Specialty Chemicals" },
+  { name: "KRIBHCO", sector: "Fertilisers" },
+  { name: "Prestige Group", sector: "Real Estate" },
+  { name: "Jobby Engineering", sector: "Industrial Contracting" },
+];
+
+/* ------------------------------------------------------------------ */
+/*  INDUSTRIES                                                         */
+/* ------------------------------------------------------------------ */
+
 export const industries: IndustryItem[] = [
   {
-    id: "construction",
-    title: "Construction & Real Estate",
-    icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+    id: "oil-gas",
+    title: "Oil, Gas & Refining",
+    icon: "flame",
     description:
-      "We support residential and commercial building construction projects with H-Frame, tubular, and cuplock scaffolding for all phases — from foundation to finishing. Our systems are designed for fast deployment and safe operation on active construction sites.",
+      "Refinery turnarounds run on a clock. We mobilise scaffolding crews for planned shutdowns, work inside the client's permit-to-work system, and hand over tagged access so maintenance teams can start on schedule rather than waiting on scaffold.",
     applications: [
-      "Residential apartment towers and villa projects",
-      "Commercial office buildings and retail complexes",
-      "Mixed-use developments",
-      "Renovation and re-cladding projects",
+      "Distillation column and vessel access",
+      "Pipe rack and interconnecting piping scaffolds",
+      "Heater, furnace and exchanger access",
+      "Tank farm ring scaffolding and painting",
     ],
   },
   {
-    id: "industrial",
-    title: "Industrial & Manufacturing Plants",
-    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
+    id: "chemical",
+    title: "Chemical & Petrochemical",
+    icon: "beaker",
     description:
-      "Specialized scaffolding for cement, steel, chemical, and power plants — including shutdown/turnaround access, confined-space platforming, and equipment-specific configurations. We understand industrial safety protocols and work permit systems.",
+      "Chemical plants demand corrosion-aware material and disciplined housekeeping. We supply galvanised scaffold stock suited to aggressive environments and execute protective coating and insulation packages alongside the access work.",
     applications: [
-      "Cement plant preheater towers and cooler access",
-      "Steel plant furnace and mill area scaffolding",
-      "Chemical plant vessel and column access",
-      "Power plant boiler, turbine, and ESP access",
+      "Reactor and column internal platforming",
+      "Chemical-resistant coating systems",
+      "Cold insulation with vapour barriers",
+      "Confined space access arrangements",
+    ],
+  },
+  {
+    id: "power-cement",
+    title: "Power & Cement Plants",
+    icon: "bolt",
+    description:
+      "Boiler, ESP, preheater and cooler areas involve congested steelwork and tight shutdown windows. Our tube & coupler capability lets us build access where a modular system simply will not fit, and dismantle it just as fast.",
+    applications: [
+      "Boiler drum, economiser and ducting access",
+      "ESP and bag-house maintenance scaffolds",
+      "Preheater tower and cyclone access",
+      "Refractory work platforms",
+    ],
+  },
+  {
+    id: "steel-manufacturing",
+    title: "Steel & Heavy Manufacturing",
+    icon: "factory",
+    description:
+      "Mill, furnace and conveyor areas need access that respects live operations. We plan sequences around production, use permit-controlled work windows, and maintain the housekeeping standards heavy plants expect.",
+    applications: [
+      "Furnace and ladle area scaffolding",
+      "Conveyor gallery and transfer tower access",
+      "Structural steel protective painting",
+      "Duct and stack insulation",
     ],
   },
   {
     id: "infrastructure",
-    title: "Infrastructure / EPC Projects",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
+    title: "Infrastructure & EPC",
+    icon: "bridge",
     description:
-      "We partner with EPC contractors on large-scale infrastructure projects including bridges, flyovers, metro stations, and water treatment facilities. Our tube & coupler and cuplock systems handle the heavy loads and complex geometries these projects demand.",
+      "Bridges, flyovers, metro corridors and water treatment plants bring heavy loads and awkward geometry. Our tube & coupler and cuplock stock handles both, with tie and bracing arrangements planned for each structure.",
     applications: [
-      "Bridge pier and deck scaffolding",
-      "Metro station and elevated corridor construction",
-      "Water treatment and sewage treatment plants",
-      "Dam and barrage maintenance access",
+      "Bridge pier, deck and soffit access",
+      "Metro station and elevated corridor works",
+      "Water and sewage treatment plant structures",
+      "Formwork shoring and birdcage decks",
     ],
   },
   {
-    id: "warehousing",
-    title: "Warehousing & Logistics",
-    icon: "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4",
+    id: "building",
+    title: "Building & Real Estate",
+    icon: "building",
     description:
-      "PEB warehouse and logistics park projects require efficient access solutions for roof work, mezzanine installation, and MEP fitting. We provide fast-mobilizing scaffolding packages designed for large-footprint warehouse construction schedules.",
+      "From G+5 commercial blocks to high-rise residential towers, we provide facade access that keeps the finishing trades moving — with loading bays, staircase towers and progressive raises matched to the site programme.",
     applications: [
-      "PEB warehouse roof and wall panel installation",
-      "Mezzanine floor and racking system access",
-      "Sprinkler and MEP installation platforms",
-      "Cold storage and food processing facility access",
-    ],
-  },
-  {
-    id: "commercial-fitout",
-    title: "Commercial Fit-Out Projects",
-    icon: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
-    description:
-      "Interior fit-out projects for offices, malls, hotels, and retail spaces require clean, non-marking scaffolding that can be rapidly set up and adjusted in occupied or semi-occupied environments. Our systems are designed for minimal footprint and clean operation.",
-    applications: [
-      "Office interior fit-out and ceiling work",
-      "Mall atrium and high-ceiling retail access",
-      "Hotel lobby and banquet hall renovation",
-      "Airport terminal and metro station interiors",
+      "External facade access for finishing trades",
+      "Material loading bays and stair towers",
+      "Slab shoring and support scaffolds",
+      "Renovation and re-cladding access",
     ],
   },
 ];
 
-export const faqs: FAQItem[] = [
+/* ------------------------------------------------------------------ */
+/*  MATERIALS                                                          */
+/* ------------------------------------------------------------------ */
+
+export const materials: MaterialItem[] = [
+  { group: "Cuplock System", name: "Standards (Verticals)", spec: "1.0m / 1.5m / 2.0m / 2.5m / 3.0m" },
+  { group: "Cuplock System", name: "Ledgers (Horizontals)", spec: "0.6m / 0.9m / 1.2m / 1.5m / 1.8m / 2.5m" },
+  { group: "Cuplock System", name: "Base Jack & U-Jack", spec: "Adjustable, 600mm typical" },
+  { group: "Cuplock System", name: "Ladder & Stair Units", spec: "Integrated access bays" },
+  { group: "Tube & Coupler", name: "MS Scaffolding Pipe", spec: "48.3mm OD, various lengths" },
+  { group: "Tube & Coupler", name: "Right-Angle Coupler", spec: "Forged / pressed" },
+  { group: "Tube & Coupler", name: "Swivel Coupler", spec: "For raking and bracing" },
+  { group: "Tube & Coupler", name: "Sleeve & Joint Pin", spec: "Pipe end connection" },
+  { group: "H-Frame System", name: "H-Frames", spec: "Standard heights with cross-brace" },
+  { group: "H-Frame System", name: "Cross Braces", spec: "Locking pin type" },
+  { group: "Decking", name: "MS Challi / Walkway", spec: "Perforated metal deck" },
+  { group: "Decking", name: "Metal Planks & Battens", spec: "Full-width platform decking" },
+  { group: "Formwork", name: "Adjustable Props", spec: "Telescopic, various ranges" },
+  { group: "Formwork", name: "Spans & Soldiers", spec: "Slab and beam support" },
+  { group: "Safety", name: "Guardrail, Mid-rail, Toe Board", spec: "Fitted at every working lift" },
+  { group: "Safety", name: "Safety Netting & Sheeting", spec: "Debris containment" },
+];
+
+export const materialGroups = [
+  "Cuplock System",
+  "Tube & Coupler",
+  "H-Frame System",
+  "Decking",
+  "Formwork",
+  "Safety",
+];
+
+/* ------------------------------------------------------------------ */
+/*  PROCESS                                                            */
+/* ------------------------------------------------------------------ */
+
+export const processSteps = [
   {
-    id: "f1",
-    question: "What scaffolding systems do you offer?",
-    answer:
-      "We offer four main scaffolding systems: H-Frame scaffolding (modular, ideal for building facades and straight-line work), Tubular / Tube & Coupler scaffolding (highly flexible for complex geometries and industrial plants), Cuplock scaffolding (heavy-duty, high-capacity system for high-rise buildings and industrial applications), and comprehensive material supply with technical support on rent or sale basis.",
+    step: "01",
+    title: "Enquiry & Site Survey",
+    description:
+      "You share the scope, drawings or a site location. We visit, take measurements, assess ground conditions, tie points and access constraints, and understand your programme dates.",
+    icon: "search",
   },
   {
-    id: "f2",
-    question: "What areas do you serve?",
-    answer:
-      "We serve projects across India with a focus on construction and industrial hubs. Our operational reach covers major regions through planned mobilization. Contact our coordination team for specific location-based deployment feasibility and timelines.",
+    step: "02",
+    title: "Proposal & Method",
+    description:
+      "You receive an itemised quotation with the proposed system, material take-off, manpower plan and a method statement covering sequence and safety arrangements.",
+    icon: "document",
   },
   {
-    id: "f3",
-    question: "What are your rental terms and minimum duration?",
-    answer:
-      "We offer flexible rental periods — weekly, monthly, or full project-duration basis. The minimum rental duration depends on the material quantity and type. We work with clients to arrive at a commercially viable arrangement that suits their project timeline. Contact us with your requirements for a tailored quote.",
+    step: "03",
+    title: "Mobilisation",
+    description:
+      "On work order, material is inspected and despatched with an item-wise challan. Crew documentation, medicals and gate passes are processed in parallel so nothing holds up day one.",
+    icon: "truck",
   },
   {
-    id: "f4",
-    question: "How quickly can you mobilize to a new project site?",
-    answer:
-      "Mobilization timelines depend on project location, material quantity, and system type. For standard H-Frame requirements within our primary operating regions, we can typically begin mobilization within 3-5 working days of order confirmation. Larger cuplock and tubular requirements may require additional lead time for material allocation and logistics.",
+    step: "04",
+    title: "Execution Under Permit",
+    description:
+      "Work proceeds under your permit-to-work system with daily toolbox talks. Scaffolds are tagged on completion and inspected on a documented cycle throughout the job.",
+    icon: "shield",
   },
   {
-    id: "f5",
-    question: "What safety standards do you follow?",
-    answer:
-      "We adhere to IS 3696 (Part 1) — the Indian Standard Safety Code for Scaffolds and Ladders — and align our practices with international OSHA scaffolding safety guidelines. Our crew follows a structured safety protocol: pre-use material inspection, toolbox talks before erection, mandatory PPE (helmets, harnesses, safety shoes, gloves), proper bracing and anchoring, and load capacity verification. For detailed information, visit our Safety & Compliance page.",
-  },
-  {
-    id: "f6",
-    question: "Do you provide on-site supervision during the project?",
-    answer:
-      "Yes. A dedicated site supervisor is assigned to every project involving erection and dismantling. The supervisor oversees safe erection practices, daily pre-use checks, crew coordination, and serves as the single point of contact for on-site technical queries throughout the scaffolding lifecycle on your project.",
-  },
-  {
-    id: "f7",
-    question: "What about billing — do you provide GST invoices?",
-    answer:
-      "Currently billed without GST — GST invoicing to be introduced soon. This does not affect service quality, material standards, or project execution in any way. For any billing-related queries, please contact our documentation team.",
-  },
-  {
-    id: "f8",
-    question: "What is the experience level of your erection crew?",
-    answer:
-      "Our erection teams consist of trained and experienced scaffolders and riggers who have worked on diverse project types — from residential buildings to industrial plants. All crew members undergo safety orientation, PPE training, and system-specific erection training before being deployed to project sites. The crew is supervised by experienced site supervisors who verify every structure before handover.",
-  },
-  {
-    id: "f9",
-    question: "Do you provide structural design and load calculations for scaffolding?",
-    answer:
-      "We provide load estimation and configuration planning as part of our erection service. For large-scale or complex projects requiring formal structural design calculations, we coordinate with qualified structural engineering associates. Please discuss your specific requirements with our team during inquiry.",
-  },
-  {
-    id: "f10",
-    question: "Can you work on projects where other contractors are also active?",
-    answer:
-      "Yes. Our teams are experienced in working on multi-contractor sites. We coordinate with the principal contractor or project manager to align our scaffolding activities with the overall site schedule, safety protocols, and work permit systems. Our crew is trained to operate within integrated site safety management frameworks.",
+    step: "05",
+    title: "Handover & Demobilisation",
+    description:
+      "On completion we dismantle in sequence, reconcile material against the challan, clear the area and close out documentation for billing.",
+    icon: "check",
   },
 ];
 
-export const clientIndustries: IndustryItem[] = [
+/* ------------------------------------------------------------------ */
+/*  DIFFERENTIATORS                                                    */
+/* ------------------------------------------------------------------ */
+
+export const differentiators = [
   {
-    id: "ci1",
-    title: "Cement Plants",
-    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
-    description: "Preheater tower, cooler, ducting, and silo access scaffolding",
-    applications: [],
+    title: "Three Disciplines, One Contractor",
+    description:
+      "Scaffolding, protective painting and thermal insulation from a single vendor — one work order, one point of contact, no interface gaps between trades.",
+    icon: "layers",
   },
   {
-    id: "ci2",
-    title: "Steel Plants",
-    icon: "M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z",
-    description: "Furnace, mill area, and material handling corridor access",
-    applications: [],
+    title: "Refinery-Grade Discipline",
+    description:
+      "Our crews are used to permit-to-work systems, gate pass procedures, toolbox talks and shutdown timelines at major plants — not just open construction sites.",
+    icon: "shield",
   },
   {
-    id: "ci3",
-    title: "Power Plants",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-    description: "Boiler, ESP, turbine hall, and chimney scaffolding",
-    applications: [],
+    title: "Documented, Not Assumed",
+    description:
+      "Scaffold tags, inspection registers, DFT readings and material challans. Everything that should be on paper is on paper, ready for your audit.",
+    icon: "document",
   },
   {
-    id: "ci4",
-    title: "Chemical & Refinery",
-    icon: "M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z",
-    description: "Process column, vessel, and pipe-rack access platforms",
-    applications: [],
+    title: "Fast Mobilisation",
+    description:
+      "Shutdown windows do not move. We keep material inspected and ready so crews and stock can reach site quickly when your dates are fixed.",
+    icon: "bolt",
+  },
+  {
+    title: "Material You Can Trust",
+    description:
+      "Bent, cracked or heavily corroded items are removed from circulation. What arrives at your site is stock we would put our own people on.",
+    icon: "check",
+  },
+  {
+    title: "Pan-India from Gujarat",
+    description:
+      "Based at Sayan, Surat — in the middle of Gujarat's refinery and chemical belt — and mobilising to project sites across India.",
+    icon: "map",
+  },
+];
+
+/* ------------------------------------------------------------------ */
+/*  SAFETY                                                             */
+/* ------------------------------------------------------------------ */
+
+export const safetyPractices = [
+  {
+    title: "Permit-to-Work Compliance",
+    description:
+      "No work starts without a valid permit from the client. Height work, hot work and confined space entry each follow the site's own permit regime, and our supervisors are trained to read and honour permit conditions.",
+    icon: "document",
+  },
+  {
+    title: "100% Fall Protection at Height",
+    description:
+      "Full body harness with double lanyard is mandatory above 1.8m. Erectors clip to a lifeline or sound anchor point at all times, including during the erection and dismantling sequence itself.",
+    icon: "shield",
+  },
+  {
+    title: "Scaffold Tagging System",
+    description:
+      "Every completed scaffold carries a tag. Green means inspected and safe to use; red means incomplete or under modification. Tags are dated and signed, and no untagged scaffold is released to other trades.",
+    icon: "tag",
+  },
+  {
+    title: "Daily Toolbox Talks",
+    description:
+      "Each shift opens with a briefing covering the day's scope, specific hazards, PPE checks and the emergency plan. Attendance is recorded and available to the client's HSE team.",
+    icon: "users",
+  },
+  {
+    title: "Inspected Material Only",
+    description:
+      "Scaffold stock is checked before despatch and again on site. Bent standards, cracked welds, damaged couplers and split planks are quarantined and taken out of service.",
+    icon: "check",
+  },
+  {
+    title: "Trained & Documented Crew",
+    description:
+      "Erectors work under experienced supervisors, with height-work medical fitness records, induction training and site-specific orientation completed before entering the workface.",
+    icon: "badge",
   },
 ];
 
 export const safetyStandards = [
   {
-    title: "IS 3696 (Part 1) Compliance",
-    description:
-      "We follow the Indian Standard Safety Code for Scaffolds and Ladders (IS 3696 Part 1), which specifies safety requirements for the erection, use, and dismantling of scaffolding in construction and industrial settings. This includes material specifications, load ratings, bracing requirements, and safe work practices.",
-    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    code: "IS 3696 (Part 1)",
+    title: "Safety Code for Scaffolds & Ladders",
+    note: "The Indian Standard we follow for scaffold erection practice, working platform width, guardrail heights and ladder access.",
   },
   {
-    title: "OSHA Scaffolding Guidelines (International Benchmark)",
-    description:
-      "We align our safety practices with OSHA 1926 Subpart L scaffolding standards as an international best-practice benchmark — particularly for projects involving multinational EPC contractors or where client specifications reference OSHA requirements. This covers guardrail systems, fall protection, platform construction, and competent person inspections.",
-    icon: "M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z",
+    code: "IS 4014",
+    title: "Code of Practice for Steel Tubular Scaffolding",
+    note: "Reference for steel tubular scaffold members, couplers, spacing and bracing arrangements.",
   },
   {
-    title: "PPE Compliance",
-    description:
-      "Every crew member on our sites is equipped with and required to use full PPE: industrial safety helmets (IS 2925), full-body safety harnesses with lanyards for work above 2m height, safety shoes with steel toe caps, high-visibility safety vests, and heavy-duty work gloves. PPE usage is verified during pre-work toolbox talks and monitored by the site supervisor throughout the shift.",
-    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    code: "BOCW Act, 1996",
+    title: "Building & Other Construction Workers Act",
+    note: "Statutory framework covering welfare, safety provisions and working conditions for construction workers in India.",
   },
   {
-    title: "Trained & Experienced Rigging Crew",
-    description:
-      "Our erection teams are trained in scaffold assembly, bracing, anchoring, and load distribution. Crew members have hands-on experience across multiple project types and are briefed on site-specific hazards and access plans before beginning work. Refresher safety training is conducted periodically.",
-    icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z",
-  },
-  {
-    title: "Pre-Use Inspection Protocol",
-    description:
-      "Before any scaffold structure is handed over for use, our supervisor conducts a systematic pre-use inspection covering: material condition (no bent/damaged components), correct bracing pattern and tie-off, base plate and sole board placement, guardrail and toe-board installation, platform planking completeness, and load rating display. Inspections are documented in a checklist format.",
-    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4",
-  },
-  {
-    title: "Load Capacity Adherence & Proper Bracing",
-    description:
-      "Every scaffold structure is built to a defined load category (light duty, medium duty, heavy duty, or special) with appropriate bracing patterns. We never exceed the rated load capacity of the system. Proper anchoring and tie-offs are installed at specified intervals based on structure height and configuration, in accordance with IS 3696 and system manufacturer guidelines.",
-    icon: "M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3",
+    code: "Client HSE Systems",
+    title: "Site-Specific Requirements",
+    note: "At every plant we adopt the client's own HSE manual, permit system, PPE matrix and induction requirements in full.",
   },
 ];
 
-export const differentiators = [
+export const ppeList = [
+  "Safety helmet with chin strap",
+  "Full body harness with double lanyard",
+  "Safety shoes with steel toe",
+  "Hand gloves appropriate to task",
+  "Safety goggles / face shield",
+  "Hi-visibility jacket",
+  "Dust mask or respirator for painting",
+  "Ear protection in high-noise areas",
+];
+
+/* ------------------------------------------------------------------ */
+/*  TESTIMONIAL-STYLE CAPABILITY STATEMENTS (not fabricated quotes)    */
+/* ------------------------------------------------------------------ */
+
+export const commitments = [
   {
-    title: "Trained & Certified Crew",
-    description:
-      "Every scaffolder on our team undergoes system-specific training and safety orientation. Our crew is not casual labor — they are skilled scaffold erection professionals who understand load distribution, bracing geometry, and safe work practices.",
-    icon: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z",
+    stat: "Zero",
+    label: "Compromise on fall protection",
+    detail: "Harness and anchorage discipline is non-negotiable on every Kamal Engineering workface.",
   },
   {
-    title: "Safety-First Culture",
-    description:
-      "Safety is not an add-on — it's how we work. From pre-use material inspection to toolbox talks, PPE compliance, and documented handover checklists, safety runs through every stage of our process.",
-    icon: "M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z",
+    stat: "24 hrs",
+    label: "Typical quotation turnaround",
+    detail: "Send us a scope and drawings; you get an itemised proposal back within a working day.",
   },
   {
-    title: "Faster Mobilization",
-    description:
-      "We maintain a ready inventory of scaffolding material across all systems — H-Frame, tubular, cuplock — enabling faster mobilization to your project site. Standard requirements within our operating region can begin deployment within days.",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-  },
-  {
-    title: "Transparent Documentation",
-    description:
-      "We provide documented material lists, inspection checklists, daily progress updates, and clear billing — so you always know exactly what's deployed, what's being used, and what's being billed. No surprises.",
-    icon: "M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z",
-  },
-  {
-    title: "Multi-System Expertise",
-    description:
-      "Unlike contractors who only offer one system, we provide H-Frame, Tubular, and Cuplock scaffolding — and we recommend the right system for your specific project, not the one we happen to have in stock. Right system for the right application.",
-    icon: "M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7M4 7c0-2 1-3 3-3h10c2 0 3 1 3 3M4 7h16",
-  },
-  {
-    title: "Process-Driven Execution",
-    description:
-      "Every project follows a structured workflow: inquiry → site survey → system recommendation → quotation → material allocation → mobilization → supervised erection → inspection handover → periodic review → planned dismantling. Engineering discipline applied to scaffolding services.",
-    icon: "M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2",
+    stat: "3-in-1",
+    label: "Disciplines under one work order",
+    detail: "Scaffolding, painting and insulation coordinated by a single contractor.",
   },
 ];
+
+/* ------------------------------------------------------------------ */
+/*  FAQ                                                                */
+/* ------------------------------------------------------------------ */
+
+export const faqs: FAQItem[] = [
+  {
+    category: "Getting Started",
+    question: "How do I get a quotation from Kamal Engineering?",
+    answer:
+      "Send your scope through the enquiry form, on WhatsApp, or by phone. Share drawings, a rough sketch or even site photographs along with your target dates. For anything sizeable we will visit the site to take measurements and check access. You will normally receive an itemised quotation within one working day of the survey.",
+  },
+  {
+    category: "Getting Started",
+    question: "What information should I provide with my enquiry?",
+    answer:
+      "The more specific the better: type of work (scaffolding, painting, insulation or a combination), structure height and dimensions, duration required, site location, and whether it is a shutdown with fixed dates. If you have a client specification for coating or insulation, send that too — it determines the system and therefore the price.",
+  },
+  {
+    category: "Getting Started",
+    question: "Do you take small jobs, or only large contracts?",
+    answer:
+      "Both. We handle single-building facade scaffolds and short maintenance jobs as readily as multi-week plant shutdowns. Tell us the scope and we will tell you honestly whether we are the right fit.",
+  },
+  {
+    category: "Scope & Capability",
+    question: "Which scaffolding systems do you work with?",
+    answer:
+      "Cuplock for heavy-duty industrial and high-rise access, tube & coupler for irregular geometry and industrial plants, and H-Frame for straight-run building facades. We routinely combine systems on a single job where the structure demands it — for example cuplock main bays with tube & coupler infills around pipework.",
+  },
+  {
+    category: "Scope & Capability",
+    question: "Do you provide only material, or manpower as well?",
+    answer:
+      "Either. We supply material on monthly hire or on sale for contractors who have their own erection crew, and we also take complete labour-plus-material packages where we handle the entire access scope from survey through to dismantling.",
+  },
+  {
+    category: "Scope & Capability",
+    question: "Can you do painting and insulation along with the scaffolding?",
+    answer:
+      "Yes — that is one of our main advantages. Because we execute all three disciplines, the access, the coating and the insulation can run under one work order with one point of contact. It removes the coordination gaps that appear when three separate vendors are waiting on each other.",
+  },
+  {
+    category: "Scope & Capability",
+    question: "Where do you operate?",
+    answer:
+      "We are based at Sayan, Surat in Gujarat, in the middle of the state's refinery and chemical belt, and we mobilise to project sites across India. For sites outside Gujarat we factor transport and crew accommodation into the quotation transparently.",
+  },
+  {
+    category: "Safety & Compliance",
+    question: "What safety standards do you follow?",
+    answer:
+      "Our scaffold erection practice follows IS 3696 (Part 1) and IS 4014, and we operate within the BOCW Act framework. On plant sites we additionally adopt the client's own HSE manual, permit-to-work system, PPE matrix and induction requirements in full — the client's system always takes precedence.",
+  },
+  {
+    category: "Safety & Compliance",
+    question: "How do you ensure a scaffold is safe to use?",
+    answer:
+      "Every completed scaffold is tagged. A green tag means it has been inspected and is released for use; a red tag means it is incomplete or under modification and must not be used. Tags are dated and signed, and a scaffold inspection register is maintained through the life of the structure.",
+  },
+  {
+    category: "Safety & Compliance",
+    question: "Is your crew trained and insured?",
+    answer:
+      "Erectors work under experienced supervisors and complete site induction, height-work medical fitness and toolbox training before entering the workface. Statutory worker coverage is arranged as applicable to the contract. Specific documentation can be shared with your HSE and contracts teams on request.",
+  },
+  {
+    category: "Safety & Compliance",
+    question: "What PPE do your workers use?",
+    answer:
+      "Safety helmet with chin strap, full body harness with double lanyard for all work above 1.8m, steel-toe safety shoes, task-appropriate gloves, goggles or face shield, and hi-visibility jacket as standard. Respirators are added for painting work and ear protection in high-noise areas.",
+  },
+  {
+    category: "Commercial",
+    question: "How is scaffolding work priced?",
+    answer:
+      "It depends on the job. Common bases are per square metre of scaffold face area, per cubic metre for volumetric or birdcage scaffolds, per tonne per month for material hire, or a lump sum for a defined package. We state the basis clearly in the quotation so there is no ambiguity at billing.",
+  },
+  {
+    category: "Commercial",
+    question: "What are your payment and billing terms?",
+    answer:
+      "Terms are agreed in the work order before mobilisation. For longer contracts we typically raise running account bills against joint measurement, and for shorter jobs we bill on completion. Measurement sheets and supporting documentation accompany every invoice.",
+  },
+  {
+    category: "Commercial",
+    question: "How quickly can you mobilise?",
+    answer:
+      "For sites within Gujarat we can usually mobilise material and crew within a few days of a confirmed work order. Outside Gujarat it depends on transport distance and gate pass processing at the client's plant. If you have a fixed shutdown date, tell us early and we will plan backwards from it.",
+  },
+  {
+    category: "Commercial",
+    question: "Who do I contact for what?",
+    answer:
+      "For enquiries, quotations, work orders and billing documentation, contact Suraj Kumar on +91 8797304532. For site surveys, mobilisation and day-to-day execution matters, contact Gourav Yadav on +91 7979909712.",
+  },
+];
+
+export const faqCategories = ["All", "Getting Started", "Scope & Capability", "Safety & Compliance", "Commercial"];

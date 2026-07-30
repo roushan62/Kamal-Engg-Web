@@ -1,202 +1,346 @@
-"use client";
+import Link from "next/link";
+import Image from "next/image";
+import type { Metadata } from "next";
 
-import PageHeader from "@/components/PageHeader";
-import ScrollReveal from "@/components/ScrollReveal";
-import CTABanner from "@/components/CTABanner";
-import PlaceholderImage from "@/components/PlaceholderImage";
-import { TEAM } from "@/lib/constants";
-import { differentiators } from "@/data/content";
+import PageHero from "@/components/PageHero";
+import SectionHeading from "@/components/SectionHeading";
+import CTASection from "@/components/CTASection";
+import StatsStrip from "@/components/StatsStrip";
+import ClientMarquee from "@/components/ClientMarquee";
+import Icon from "@/components/Icon";
+import Reveal, { Stagger, StaggerItem } from "@/components/Reveal";
+import { COMPANY, TEAM } from "@/lib/constants";
+import { differentiators, processSteps } from "@/data/content";
+import { disciplines } from "@/data/services";
+
+export const metadata: Metadata = {
+  title: "About Us",
+  description:
+    "Kamal Engineering is a multi-discipline industrial services contractor from Sayan, Surat, Gujarat — delivering scaffolding, protective painting and thermal insulation at plants and project sites across India.",
+};
+
+const values = [
+  {
+    icon: "shield",
+    title: "Safety Before Schedule",
+    body: "If the safe way takes longer, we take longer. No scaffold is released without a tag, and no one works at height without being clipped on.",
+  },
+  {
+    icon: "document",
+    title: "Everything on Record",
+    body: "Tags, inspection registers, DFT logs, material challans, toolbox attendance. If a client's audit team asks, the paper exists.",
+  },
+  {
+    icon: "target",
+    title: "Say What Is Real",
+    body: "We quote what we can deliver and flag what we cannot. An honest 'no' at enquiry stage saves everyone a bad shutdown.",
+  },
+  {
+    icon: "users",
+    title: "Look After the Crew",
+    body: "Good PPE, proper induction, fair treatment. Skilled erectors are hard to find and harder to replace — we keep ours.",
+  },
+];
 
 export default function AboutPage() {
   return (
     <>
-      <PageHeader
-        title="About Kamal Engineering"
-        subtitle="A modern, process-driven scaffolding partner — built on technical expertise, safety compliance, and reliable project execution."
+      <PageHero
+        breadcrumb="About"
+        eyebrow="Who We Are"
+        title="A specialist industrial contractor built on plant-floor experience"
+        description="Kamal Engineering grew out of years of hands-on work inside India's refineries, chemical plants and construction sites — first as sub-contract crews for principal contractors, now as an independent multi-discipline service provider."
+        image="/images/team-site.jpg"
+        chips={["Sayan, Surat — Gujarat", "Pan-India Mobilisation", "Scaffolding • Painting • Insulation"]}
       />
 
-      {/* Company Overview */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <ScrollReveal direction="left">
-              <PlaceholderImage
-                label="Kamal Engineering Team & Scaffolding Project"
-                src="/images/about-overview.jpg"
-                aspectRatio="video"
-                className="min-h-[320px]"
-              />
-            </ScrollReveal>
-            <ScrollReveal direction="right" delay={0.1}>
-              <div className="accent-line mb-6" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-steel-dark tracking-tight">
-                Who We Are
-              </h2>
-              <div className="mt-6 space-y-4 text-steel-600 leading-relaxed">
-                <p>
-                  Kamal Engineering is a specialized scaffolding services company providing end-to-end 
-                  solutions for construction and industrial projects across India. Our organization brings 
-                  together trained supervisors, experienced scaffolders, and a management team focused on 
-                  delivering safe, efficient, and technically sound scaffolding systems.
-                </p>
-                <p>
-                  We operate with a clear philosophy: scaffolding is not just about putting up pipes and 
-                  platforms — it is a critical access and safety system that must be engineered, erected, 
-                  inspected, and maintained with discipline. Every project we take on follows a structured 
-                  workflow, from initial site survey and system recommendation to supervised erection and 
-                  documented handover.
-                </p>
-                <p>
-                  Unlike traditional labour contractors, we deploy trained crews who understand load 
-                  distribution, bracing geometry, and safety protocols. Our multi-system expertise — 
-                  H-Frame, Tubular (Tube &amp; Coupler), and Cuplock — allows us to recommend the right 
-                  scaffolding system for your specific application, not just the one we happen to have 
-                  available.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* Mission & Vision */}
-      <section className="py-16 sm:py-20 bg-steel-dark text-white relative overflow-hidden grid-pattern">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-safety via-safety-400 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
-            <ScrollReveal>
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-                <div className="w-12 h-12 rounded-xl bg-safety/20 flex items-center justify-center mb-5">
-                  <svg className="w-6 h-6 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
+      {/* Story */}
+      <section className="section-y">
+        <div className="container-x">
+          <div className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            <Reveal direction="right">
+              <div className="relative">
+                <div className="img-zoom relative aspect-[4/5] overflow-hidden rounded-2xl bg-steel-100 shadow-[0_32px_64px_-32px_rgba(20,23,28,0.55)]">
+                  <Image
+                    src="/images/about-overview.jpg"
+                    alt="Kamal Engineering scaffolding work at an industrial site"
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    className="object-cover"
+                  />
                 </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Our Mission</h3>
-                <p className="text-white/70 leading-relaxed">
-                  To be the most trusted scaffolding partner for India&apos;s construction and industrial 
-                  sectors — delivering safe, efficient, and technically sound access solutions through 
-                  trained crews, quality material, and process-driven execution. We are committed to 
-                  raising the standard of scaffolding services in the country by combining engineering 
-                  discipline with practical site expertise.
-                </p>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={0.15}>
-              <div className="bg-white/5 backdrop-blur-sm rounded-xl p-8 border border-white/10">
-                <div className="w-12 h-12 rounded-xl bg-safety/20 flex items-center justify-center mb-5">
-                  <svg className="w-6 h-6 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                  </svg>
-                </div>
-                <h3 className="text-2xl font-bold text-white mb-4">Our Vision</h3>
-                <p className="text-white/70 leading-relaxed">
-                  To become the benchmark for professional scaffolding services in India — where 
-                  &ldquo;Kamal Engineering standard&rdquo; is recognized as a mark of safety, quality, 
-                  and reliability. We envision expanding our operational footprint across all major 
-                  industrial and construction hubs, building long-term partnerships with leading 
-                  contractors and EPC companies, and contributing to a safer, more professional 
-                  scaffolding industry in the country.
-                </p>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* What Sets Us Apart */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <ScrollReveal>
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="section-title">What Sets Us Apart</h2>
-              <p className="section-subtitle mx-auto">
-                The scaffolding industry is crowded with traditional labour contractors. 
-                Here&apos;s how we differentiate ourselves.
-              </p>
-            </ScrollReveal>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {differentiators.map((diff, i) => (
-              <ScrollReveal key={diff.title} delay={i * 0.1}>
-                <div className="group bg-white rounded-xl border border-steel-100 p-6 sm:p-7
-                                card-hover hover:border-safety/30 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-safety/10 flex items-center justify-center mb-5
-                                  group-hover:bg-safety/20 transition-colors">
-                    <svg className="w-6 h-6 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={diff.icon} />
-                    </svg>
+                <div className="absolute -bottom-6 -right-4 hidden w-52 rounded-2xl border border-steel-200 bg-white p-5 shadow-[0_22px_44px_-20px_rgba(20,23,28,0.4)] sm:block lg:-right-8">
+                  <div className="font-sans text-[2.25rem] font-extrabold leading-none text-safety-600">
+                    3
                   </div>
-                  <h3 className="text-lg font-bold text-steel-dark mb-2">{diff.title}</h3>
-                  <p className="text-sm text-steel-500 leading-relaxed">{diff.description}</p>
+                  <div className="mt-1.5 text-[0.85rem] font-bold text-steel-950">
+                    Disciplines in-house
+                  </div>
+                  <p className="mt-1 text-[0.72rem] leading-snug text-steel-500">
+                    Scaffolding, painting and insulation under one contractor
+                  </p>
                 </div>
-              </ScrollReveal>
+              </div>
+            </Reveal>
+
+            <div>
+              <SectionHeading
+                eyebrow="Our Story"
+                title="From sub-contract crews to an independent multi-discipline contractor"
+              />
+              <Reveal delay={0.15}>
+                <div className="mt-6 space-y-4 text-[1rem] leading-relaxed text-steel-500 pretty">
+                  <p>
+                    Kamal Engineering was built the slow way — by working inside other people&apos;s
+                    contracts first. Our teams executed scaffolding, painting and insulation scope as
+                    specialist sub-contractors at plants operated by some of India&apos;s largest
+                    industrial groups, engaged through their principal contractors.
+                  </p>
+                  <p>
+                    That route taught us the things a brochure cannot: how a permit-to-work system
+                    actually functions at 6 AM on shutdown day, why a scaffold that is one lift short
+                    stops three other trades, how quickly a coating job unravels if the surface
+                    preparation was rushed, and what a plant HSE officer looks for when they walk up
+                    to a structure.
+                  </p>
+                  <p>
+                    Today we operate from{" "}
+                    <span className="font-semibold text-steel-800">
+                      {COMPANY.address.line1}, {COMPANY.address.state}
+                    </span>{" "}
+                    — in the middle of Gujarat&apos;s refinery and chemical belt — and mobilise to
+                    project sites across India. We take work both as a direct contractor and as a
+                    specialist partner to larger EPC and maintenance contractors.
+                  </p>
+                </div>
+              </Reveal>
+
+              <Reveal delay={0.22}>
+                <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                  {[
+                    { icon: "map", label: "Based in", value: `${COMPANY.address.line1}, Gujarat` },
+                    { icon: "truck", label: "Coverage", value: "Pan-India project sites" },
+                    { icon: "layers", label: "Disciplines", value: "Scaffolding, painting, insulation" },
+                    { icon: "shield", label: "Practice", value: "IS 3696 & client HSE systems" },
+                  ].map((r) => (
+                    <div
+                      key={r.label}
+                      className="flex items-start gap-3 rounded-xl border border-steel-200 bg-steel-50 p-4"
+                    >
+                      <Icon name={r.icon} size={18} className="mt-0.5 shrink-0 text-safety-600" />
+                      <div>
+                        <div className="text-[0.65rem] font-bold uppercase tracking-wider text-steel-400">
+                          {r.label}
+                        </div>
+                        <div className="mt-0.5 text-[0.85rem] font-semibold text-steel-900">
+                          {r.value}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <StatsStrip />
+
+      {/* Mission / Vision */}
+      <section className="bg-steel-50 section-y">
+        <div className="container-x">
+          <div className="grid gap-6 lg:grid-cols-2">
+            {[
+              {
+                icon: "target",
+                tag: "Our Mission",
+                title: "Make industrial access, protection and insulation predictable",
+                body: "To give plant and project teams one accountable contractor for scaffolding, painting and insulation — mobilised on time, executed under permit, documented properly, and demobilised without loose ends. Predictability is the product.",
+              },
+              {
+                icon: "eye",
+                tag: "Our Vision",
+                title: "Be the specialist contractor plants call back",
+                body: "To be the name that gets recommended inside India's refinery and chemical belt for the unglamorous reason that matters most — we did the job safely, on schedule, and left the site the way we found it.",
+              },
+            ].map((c, i) => (
+              <Reveal key={c.tag} delay={i * 0.1}>
+                <div className="card h-full p-7 md:p-9">
+                  <span className="grid h-14 w-14 place-items-center rounded-xl bg-steel-950 text-safety">
+                    <Icon name={c.icon} size={23} />
+                  </span>
+                  <span className="eyebrow mt-5 block">{c.tag}</span>
+                  <h3 className="mt-2.5 text-[1.35rem] font-bold leading-snug text-steel-950 balance">
+                    {c.title}
+                  </h3>
+                  <p className="mt-4 text-[0.95rem] leading-relaxed text-steel-500 pretty">{c.body}</p>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Leadership & Coordination Team */}
-      <section className="py-16 sm:py-20 bg-steel-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <ScrollReveal>
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="text-3xl sm:text-4xl font-bold text-steel-dark tracking-tight">
-                Leadership &amp; Coordination
-              </h2>
-              <p className="mt-4 text-lg text-steel-500 max-w-2xl mx-auto">
-                Our coordination and operations team ensures seamless communication 
-                and reliable project execution.
-              </p>
-            </ScrollReveal>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
-            {TEAM.map((member, i) => (
-              <ScrollReveal key={member.name} delay={i * 0.15}>
-                <div className="bg-white rounded-xl border border-steel-100 p-6 sm:p-8
-                                card-hover hover:border-safety/30 text-center">
-                  {/* Avatar placeholder */}
-                  <div className="w-20 h-20 rounded-full bg-safety/10 flex items-center justify-center
-                                  mx-auto mb-5 border-2 border-safety/20">
-                    <svg className="w-10 h-10 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
+      {/* Values */}
+      <section className="section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="How We Operate"
+            title="Four things we do not negotiate on"
+          />
+          <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-4" gap={0.09}>
+            {values.map((v) => (
+              <StaggerItem key={v.title} className="h-full">
+                <div className="card group h-full p-6">
+                  <span className="grid h-11 w-11 place-items-center rounded-xl bg-safety-50 text-safety-700 transition-all duration-300 group-hover:bg-safety group-hover:text-steel-950">
+                    <Icon name={v.icon} size={20} />
+                  </span>
+                  <h3 className="mt-5 text-[1rem] font-bold text-steel-950">{v.title}</h3>
+                  <p className="mt-2.5 text-[0.85rem] leading-relaxed text-steel-500 pretty">{v.body}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* Capabilities */}
+      <section className="relative overflow-hidden bg-steel-950 section-y">
+        <div className="bg-grid absolute inset-0 opacity-70" aria-hidden />
+        <div className="container-x relative">
+          <SectionHeading
+            dark
+            align="center"
+            eyebrow="Capability at a Glance"
+            title="What you get when you engage us"
+          />
+          <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" gap={0.08}>
+            {differentiators.map((d) => (
+              <StaggerItem key={d.title} className="h-full">
+                <div className="card-dark group h-full p-6 md:p-7">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-safety/12 text-safety transition-all duration-300 group-hover:bg-safety group-hover:text-steel-950">
+                    <Icon name={d.icon} size={22} />
+                  </span>
+                  <h3 className="mt-5 text-[1.05rem] font-bold text-white">{d.title}</h3>
+                  <p className="mt-2.5 text-[0.885rem] leading-relaxed text-steel-400 pretty">
+                    {d.description}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      <ClientMarquee />
+
+      {/* Team */}
+      <section className="section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="Your Points of Contact"
+            title="Two people, two clear responsibilities"
+            description="No call-centre routing. Commercial matters and site matters each have a named owner you can reach directly."
+          />
+
+          <div className="mx-auto mt-14 grid max-w-4xl gap-6 md:grid-cols-2">
+            {TEAM.map((t, i) => (
+              <Reveal key={t.phone} delay={i * 0.1}>
+                <div className="card h-full p-7 text-center md:p-8">
+                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-2xl bg-steel-950 font-sans text-[1.4rem] font-extrabold text-safety">
+                    {t.name
+                      .split(" ")
+                      .map((w) => w[0])
+                      .join("")}
                   </div>
-                  <h3 className="text-xl font-bold text-steel-dark">{member.name}</h3>
-                  <p className="text-sm text-safety font-medium mt-1">{member.role}</p>
-                  <p className="text-xs text-steel-400 mt-1">{member.department}</p>
-                  <div className="mt-4 flex items-center justify-center gap-3">
-                    <a
-                      href={`tel:+91${member.phone}`}
-                      className="inline-flex items-center gap-1.5 text-sm text-steel-600 hover:text-safety transition-colors"
-                    >
-                      <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      +91 {member.phone}
+                  <h3 className="mt-5 text-[1.2rem] font-bold text-steel-950">{t.name}</h3>
+                  <p className="mt-1 text-[0.85rem] font-semibold text-safety-700">{t.role}</p>
+                  <span className="chip mx-auto mt-3.5">{t.department}</span>
+                  <p className="mt-4 text-[0.875rem] leading-relaxed text-steel-500 pretty">{t.focus}</p>
+                  <div className="mt-6 flex flex-wrap justify-center gap-2.5">
+                    <a href={`tel:+91${t.phone}`} className="btn btn-dark !px-4 !py-2.5 !text-[0.82rem]">
+                      <Icon name="phone" size={15} />
+                      +91 {t.phone}
                     </a>
                     <a
-                      href={`https://wa.me/91${member.phone}`}
+                      href={`https://wa.me/91${t.phone}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1.5 text-sm text-green-600 hover:text-green-700 transition-colors"
+                      className="btn btn-ghost !px-4 !py-2.5 !text-[0.82rem]"
                     >
-                      <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
-                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
-                      </svg>
+                      <Icon name="whatsapp" size={15} />
                       WhatsApp
                     </a>
                   </div>
                 </div>
-              </ScrollReveal>
+              </Reveal>
             ))}
           </div>
         </div>
       </section>
 
-      <CTABanner />
+      {/* Process */}
+      <section className="bg-steel-50 section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="Working With Us"
+            title="Five steps from enquiry to closeout"
+          />
+          <Stagger className="mt-14 grid gap-5 md:grid-cols-3 lg:grid-cols-5" gap={0.09}>
+            {processSteps.map((s) => (
+              <StaggerItem key={s.step} className="h-full">
+                <div className="card group relative h-full overflow-hidden p-6">
+                  <span
+                    className="pointer-events-none absolute -right-1 -top-3 font-sans text-[4.5rem] font-extrabold leading-none text-steel-100 transition-colors duration-300 group-hover:text-safety-100"
+                    aria-hidden
+                  >
+                    {s.step}
+                  </span>
+                  <span className="relative grid h-11 w-11 place-items-center rounded-xl bg-safety text-steel-950">
+                    <Icon name={s.icon} size={20} />
+                  </span>
+                  <h3 className="relative mt-5 text-[0.98rem] font-bold text-steel-950">{s.title}</h3>
+                  <p className="relative mt-2.5 text-[0.82rem] leading-relaxed text-steel-500 pretty">
+                    {s.description}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* Disciplines quick links */}
+      <section className="section-y">
+        <div className="container-x">
+          <SectionHeading align="center" eyebrow="Explore" title="Our three service disciplines" />
+          <Stagger className="mt-12 grid gap-6 md:grid-cols-3" gap={0.1}>
+            {disciplines.map((d) => (
+              <StaggerItem key={d.name}>
+                <Link href={d.href} className="card img-zoom group block overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-steel-100">
+                    <Image src={d.image} alt={d.name} fill sizes="33vw" className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-steel-950/80 to-transparent" />
+                    <h3 className="absolute bottom-4 left-5 text-[1.3rem] font-bold text-white">
+                      {d.name}
+                    </h3>
+                  </div>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      <CTASection
+        eyebrow="Let's Talk"
+        title="Want to know if we are the right fit for your site?"
+        description="Tell us the scope and the constraints. If we are not the right contractor for it, we will say so."
+      />
     </>
   );
 }

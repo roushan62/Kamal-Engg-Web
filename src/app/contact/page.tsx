@@ -1,292 +1,252 @@
-"use client";
+import type { Metadata } from "next";
 
-import PageHeader from "@/components/PageHeader";
-import ScrollReveal from "@/components/ScrollReveal";
+import PageHero from "@/components/PageHero";
+import SectionHeading from "@/components/SectionHeading";
 import ContactForm from "@/components/ContactForm";
+import Icon from "@/components/Icon";
+import Reveal, { Stagger, StaggerItem } from "@/components/Reveal";
 import { COMPANY, TEAM } from "@/lib/constants";
 
+export const metadata: Metadata = {
+  title: "Contact Us",
+  description:
+    "Get a free quotation for scaffolding, industrial painting or thermal insulation. Call +91 8797304532, WhatsApp us, or send an enquiry. Based in Sayan, Surat, Gujarat — serving all of India.",
+};
+
 export default function ContactPage() {
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(COMPANY.mapQuery)}&output=embed`;
+
   return (
     <>
-      <PageHeader
-        title="Contact Us"
-        subtitle="Have a scaffolding requirement? Get in touch with our coordination team for technical recommendations, site assessments, and competitive quotations."
+      <PageHero
+        breadcrumb="Contact"
+        eyebrow="Get In Touch"
+        title="Tell us what you need — we will come back within a working day"
+        description="Whether it is a full turnaround access package or a few tonnes of material on hire, send the details and get an itemised quotation. No obligation, no sales pressure."
+        image="/images/yard-materials.jpg"
+        chips={["Free Site Survey", "Itemised Quotation", "Pan-India Mobilisation"]}
       />
 
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
-            {/* Contact Form */}
-            <div className="lg:col-span-3">
-              <ScrollReveal>
-                <div className="bg-white rounded-xl border border-steel-100 p-6 sm:p-8 shadow-sm">
-                  <h2 className="text-2xl font-bold text-steel-dark mb-2">
-                    Send an Enquiry
-                  </h2>
-                  <p className="text-sm text-steel-500 mb-8">
-                    Fill in the details below and our team will get back to you within 24 hours.
-                  </p>
-                  <ContactForm />
-                </div>
-              </ScrollReveal>
-            </div>
+      {/* Quick contact cards */}
+      <section className="relative -mt-px bg-steel-50 py-14 md:py-16">
+        <div className="container-x">
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4" gap={0.08}>
+            {[
+              {
+                icon: "phone",
+                title: "Call Us",
+                lines: [COMPANY.phone.primary, COMPANY.phone.secondary],
+                href: `tel:${COMPANY.phone.primary.replace(/\s/g, "")}`,
+                cta: "Tap to call",
+              },
+              {
+                icon: "whatsapp",
+                title: "WhatsApp",
+                lines: [COMPANY.phone.primary, "Fastest response"],
+                href: `https://wa.me/${COMPANY.whatsapp}`,
+                cta: "Start a chat",
+              },
+              {
+                icon: "mail",
+                title: "Email",
+                lines: [COMPANY.email],
+                href: `mailto:${COMPANY.email}`,
+                cta: "Send an email",
+              },
+              {
+                icon: "map",
+                title: "Visit / Post",
+                lines: [COMPANY.address.line1, COMPANY.address.line2],
+                href: `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(COMPANY.mapQuery)}`,
+                cta: "Open in Maps",
+              },
+            ].map((c) => (
+              <StaggerItem key={c.title} className="h-full">
+                <a
+                  href={c.href}
+                  target={c.href.startsWith("http") ? "_blank" : undefined}
+                  rel={c.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  className="card group flex h-full flex-col p-6"
+                >
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-steel-950 text-safety transition-all duration-300 group-hover:bg-safety group-hover:text-steel-950">
+                    <Icon name={c.icon} size={22} />
+                  </span>
+                  <h3 className="mt-5 text-[1rem] font-bold text-steel-950">{c.title}</h3>
+                  <div className="mt-2 flex-1 space-y-0.5">
+                    {c.lines.map((l) => (
+                      <p key={l} className="break-words text-[0.85rem] leading-snug text-steel-500">
+                        {l}
+                      </p>
+                    ))}
+                  </div>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-[0.75rem] font-bold uppercase tracking-wider text-safety-700">
+                    {c.cta}
+                    <Icon
+                      name="arrow"
+                      size={13}
+                      className="transition-transform duration-300 group-hover:translate-x-1"
+                    />
+                  </span>
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
 
-            {/* Contact Info Sidebar */}
-            <div className="lg:col-span-2">
-              <ScrollReveal direction="right" delay={0.1}>
-                <div className="space-y-8">
-                  {/* Team Contacts */}
-                  <div>
-                    <h3 className="text-sm font-semibold text-steel-400 uppercase tracking-wider mb-4">
-                      Key Contacts
-                    </h3>
-                    <div className="space-y-4">
-                      {TEAM.map((member) => (
-                        <div
-                          key={member.name}
-                          className="bg-white rounded-xl border border-steel-100 p-5
-                                     card-hover hover:border-safety/30"
-                        >
-                          <div className="flex items-start gap-3">
-                            <div className="w-12 h-12 rounded-full bg-safety/10 flex items-center justify-center
-                                            flex-shrink-0 border-2 border-safety/20">
-                              <svg
-                                className="w-6 h-6 text-safety"
-                                fill="none"
-                                stroke="currentColor"
-                                viewBox="0 0 24 24"
+      {/* Form + sidebar */}
+      <section className="section-y">
+        <div className="container-x">
+          <div className="grid gap-10 lg:grid-cols-[1.35fr_1fr] lg:gap-14">
+            <Reveal>
+              <ContactForm />
+            </Reveal>
+
+            <div className="space-y-6">
+              {/* Team */}
+              <Reveal delay={0.1}>
+                <div className="rounded-2xl border border-steel-200 bg-white p-6 md:p-7">
+                  <h3 className="text-[1.1rem] font-bold text-steel-950">Talk to the right person</h3>
+                  <p className="mt-2 text-[0.85rem] leading-relaxed text-steel-500 pretty">
+                    Commercial and site matters have separate owners — reach them directly.
+                  </p>
+                  <div className="mt-5 space-y-4">
+                    {TEAM.map((t) => (
+                      <div key={t.phone} className="rounded-xl border border-steel-200 bg-steel-50 p-4">
+                        <div className="flex items-start gap-3.5">
+                          <span className="grid h-11 w-11 shrink-0 place-items-center rounded-xl bg-steel-950 font-sans text-[0.85rem] font-extrabold text-safety">
+                            {t.name
+                              .split(" ")
+                              .map((w) => w[0])
+                              .join("")}
+                          </span>
+                          <div className="min-w-0 flex-1">
+                            <p className="text-[0.95rem] font-bold text-steel-950">{t.name}</p>
+                            <p className="text-[0.78rem] font-semibold text-safety-700">{t.role}</p>
+                            <p className="mt-1.5 text-[0.78rem] leading-snug text-steel-500 pretty">
+                              {t.focus}
+                            </p>
+                            <div className="mt-3 flex flex-wrap gap-2">
+                              <a
+                                href={`tel:+91${t.phone}`}
+                                className="inline-flex items-center gap-1.5 rounded-lg bg-steel-950 px-3 py-2 text-[0.75rem] font-bold text-white transition-colors hover:bg-steel-800"
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  strokeWidth={1.5}
-                                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                                />
-                              </svg>
-                            </div>
-                            <div className="flex-1 min-w-0">
-                              <h4 className="font-bold text-steel-dark">{member.name}</h4>
-                              <p className="text-xs text-safety font-medium mt-0.5">
-                                {member.role}
-                              </p>
-                              <p className="text-xs text-steel-400 mt-0.5">
-                                {member.department}
-                              </p>
-                              <div className="mt-2 flex items-center gap-3">
-                                <a
-                                  href={`tel:+91${member.phone}`}
-                                  className="inline-flex items-center gap-1 text-sm text-steel-600 hover:text-safety transition-colors"
-                                >
-                                  <svg
-                                    className="w-3.5 h-3.5"
-                                    fill="none"
-                                    stroke="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path
-                                      strokeLinecap="round"
-                                      strokeLinejoin="round"
-                                      strokeWidth={2}
-                                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-                                    />
-                                  </svg>
-                                  +91 {member.phone}
-                                </a>
-                                <a
-                                  href={`https://wa.me/91${member.phone}`}
-                                  target="_blank"
-                                  rel="noopener noreferrer"
-                                  className="inline-flex items-center gap-1 text-sm text-[#25D366] hover:text-[#1da851] transition-colors"
-                                >
-                                  <svg
-                                    className="w-3.5 h-3.5"
-                                    fill="currentColor"
-                                    viewBox="0 0 24 24"
-                                  >
-                                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347" />
-                                  </svg>
-                                  WhatsApp
-                                </a>
-                              </div>
+                                <Icon name="phone" size={13} />
+                                +91 {t.phone}
+                              </a>
+                              <a
+                                href={`https://wa.me/91${t.phone}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 rounded-lg bg-[#25D366] px-3 py-2 text-[0.75rem] font-bold text-white transition-opacity hover:opacity-90"
+                              >
+                                <Icon name="whatsapp" size={13} />
+                                Chat
+                              </a>
                             </div>
                           </div>
                         </div>
-                      ))}
-                    </div>
+                      </div>
+                    ))}
                   </div>
+                </div>
+              </Reveal>
 
-                  {/* Email */}
-                  <div className="bg-steel-dark text-white rounded-xl p-6">
-                    <h3 className="text-sm font-semibold text-white/60 uppercase tracking-wider mb-3">
-                      Email
-                    </h3>
-                    <a
-                      href={`mailto:${COMPANY.email}`}
-                      className="text-safety hover:text-safety-400 transition-colors break-all font-medium"
-                    >
-                      {COMPANY.email}
-                    </a>
-                  </div>
+              {/* Details */}
+              <Reveal delay={0.18}>
+                <div className="rounded-2xl border border-steel-200 bg-steel-950 p-6 text-steel-300 md:p-7">
+                  <h3 className="text-[1.1rem] font-bold text-white">Company details</h3>
+                  <ul className="mt-5 space-y-4 text-[0.875rem]">
+                    <li className="flex gap-3">
+                      <Icon name="map" size={17} className="mt-0.5 shrink-0 text-safety" />
+                      <span>
+                        <span className="block font-semibold text-white">Registered Location</span>
+                        {COMPANY.address.line1}
+                        <br />
+                        {COMPANY.address.line2}
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <Icon name="clock" size={17} className="mt-0.5 shrink-0 text-safety" />
+                      <span>
+                        <span className="block font-semibold text-white">Working Hours</span>
+                        {COMPANY.hours}
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <Icon name="truck" size={17} className="mt-0.5 shrink-0 text-safety" />
+                      <span>
+                        <span className="block font-semibold text-white">Service Area</span>
+                        {COMPANY.serviceArea}
+                      </span>
+                    </li>
+                    <li className="flex gap-3">
+                      <Icon name="layers" size={17} className="mt-0.5 shrink-0 text-safety" />
+                      <span>
+                        <span className="block font-semibold text-white">Disciplines</span>
+                        {COMPANY.legalLine}
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </Reveal>
 
-                  {/* Working Hours */}
-                  <div className="bg-white rounded-xl border border-steel-100 p-6">
-                    <h3 className="text-sm font-semibold text-steel-400 uppercase tracking-wider mb-3">
-                      Response Time
-                    </h3>
-                    <div className="space-y-2 text-sm text-steel-600">
-                      <p className="flex items-center gap-2">
-                        <svg className="w-4 h-4 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Enquiries: Within 24 hours
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <svg className="w-4 h-4 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Site Visits: Scheduled within 2-3 working days
-                      </p>
-                      <p className="flex items-center gap-2">
-                        <svg className="w-4 h-4 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
-                        Quotations: 1-2 working days after site assessment
-                      </p>
+              {/* Response promise */}
+              <Reveal delay={0.26}>
+                <div className="rounded-2xl border border-safety-200 bg-safety-50 p-6">
+                  <div className="flex gap-3.5">
+                    <Icon name="bolt" size={20} className="mt-0.5 shrink-0 text-safety-700" />
+                    <div>
+                      <h3 className="text-[0.95rem] font-bold text-safety-900">
+                        What happens after you submit
+                      </h3>
+                      <ol className="mt-3 space-y-2 text-[0.82rem] leading-relaxed text-safety-900/85">
+                        {[
+                          "Your enquiry arrives directly in our inbox.",
+                          "We call or email back to clarify the scope.",
+                          "Site survey arranged if the job needs one.",
+                          "Itemised quotation, usually within one working day.",
+                        ].map((s, i) => (
+                          <li key={s} className="flex gap-2.5">
+                            <span className="mt-0.5 grid h-4 w-4 shrink-0 place-items-center rounded-full bg-safety-700 text-[0.6rem] font-bold text-white">
+                              {i + 1}
+                            </span>
+                            <span className="pretty">{s}</span>
+                          </li>
+                        ))}
+                      </ol>
                     </div>
                   </div>
                 </div>
-              </ScrollReveal>
+              </Reveal>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Active Operational Hubs & Service Area */}
-      <section className="py-12 bg-steel-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="bg-steel-dark text-white rounded-xl border border-steel-800 overflow-hidden shadow-xl relative grid-pattern p-6 sm:p-10 lg:p-12">
-              <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-safety via-safety-400 to-transparent" />
-              
-              <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-center relative z-10">
-                {/* Hub text list */}
-                <div className="lg:col-span-2 space-y-6">
-                  <div>
-                    <span className="text-xs font-semibold text-safety uppercase tracking-wider bg-safety/10 px-3 py-1.5 rounded-full border border-safety/20">
-                      National Reach
-                    </span>
-                    <h3 className="text-2xl sm:text-3xl font-bold mt-4 tracking-tight">
-                      Our Operational Hubs &amp; Service Coverage
-                    </h3>
-                    <p className="mt-3 text-sm text-white/60 leading-relaxed">
-                      Kamal Engineering supports massive infrastructure, commercial and heavy-industrial scaffolding projects across major Indian states. Our regional logistics network ensures swift mobilization.
-                    </p>
-                  </div>
-
-                  <div className="space-y-3">
-                    {[
-                      { state: "NCR / Delhi", desc: "High-Rise & Commercial Developments" },
-                      { state: "Madhya Pradesh", desc: "Industrial Plants & Shutdown Services" },
-                      { state: "Uttar Pradesh", desc: "Commercial & Civil Infrastructure" },
-                      { state: "Rajasthan", desc: "EPC Projects, Bridge & Highway Access" },
-                      { state: "Haryana", desc: "Logistics Parks & PEB Warehouses" },
-                      { state: "Chhattisgarh", desc: "Power Plants, Boiler Access & Steel Mills" },
-                    ].map((hub) => (
-                      <div key={hub.state} className="flex items-center gap-3">
-                        <div className="w-2 h-2 rounded-full bg-safety animate-pulse" />
-                        <div>
-                          <span className="font-semibold text-sm text-white">{hub.state}</span>
-                          <span className="text-xs text-white/40 block sm:inline sm:ml-2">— {hub.desc}</span>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  <div className="pt-2 text-xs text-white/50 border-t border-white/10">
-                    <p>🇮🇳 Serving heavy B2B enterprises and tier-1 EPC contractors nationwide.</p>
-                  </div>
-                </div>
-
-                {/* Visual Technical Map Mockup */}
-                <div className="lg:col-span-3 bg-white/5 border border-white/10 rounded-xl p-6 h-[320px] flex flex-col justify-between relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-tr from-safety/5 to-transparent pointer-events-none" />
-                  
-                  {/* Grid Lines Overlay */}
-                  <div className="absolute inset-0 grid grid-cols-6 grid-rows-4 pointer-events-none opacity-20">
-                    {Array.from({ length: 24 }).map((_, i) => (
-                      <div key={i} className="border-[0.5px] border-white/20" />
-                    ))}
-                  </div>
-
-                  {/* Top bar */}
-                  <div className="flex justify-between items-center relative z-10">
-                    <div className="flex items-center gap-2">
-                      <div className="w-2.5 h-2.5 rounded-full bg-green-500 animate-ping" />
-                      <span className="text-xs font-mono text-white/80 tracking-widest uppercase">System Active</span>
-                    </div>
-                    <span className="text-[10px] font-mono text-white/40">LAT/LONG: MULTI-REGIONAL GRID</span>
-                  </div>
-
-                  {/* Hotspots Map Simulation */}
-                  <div className="relative flex-1 flex items-center justify-center">
-                    {/* Glowing structural lines */}
-                    <div className="absolute w-[200px] h-0.5 bg-gradient-to-r from-transparent via-safety/40 to-transparent rotate-45" />
-                    <div className="absolute w-[180px] h-0.5 bg-gradient-to-r from-transparent via-safety/30 to-transparent -rotate-12" />
-                    
-                    {/* Hotspot 1 (Delhi/NCR) */}
-                    <div className="absolute top-[20%] left-[45%] group cursor-pointer">
-                      <div className="w-3 h-3 bg-safety rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-safety/50">
-                        <div className="w-1.5 h-1.5 bg-steel-dark rounded-full" />
-                      </div>
-                      <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-steel-900 border border-steel-700 rounded px-2 py-1 text-[10px] font-mono text-white whitespace-nowrap opacity-0 group-hover:opacity-100 lg:opacity-100 transition-opacity">
-                        NCR HUB (ACTIVE)
-                      </div>
-                    </div>
-
-                    {/* Hotspot 2 (Madhya Pradesh) */}
-                    <div className="absolute top-[60%] left-[50%] group cursor-pointer">
-                      <div className="w-3 h-3 bg-safety rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-safety/50" style={{ animationDelay: "0.2s" }}>
-                        <div className="w-1.5 h-1.5 bg-steel-dark rounded-full" />
-                      </div>
-                      <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-steel-900 border border-steel-700 rounded px-2 py-1 text-[10px] font-mono text-white whitespace-nowrap opacity-0 group-hover:opacity-100 lg:opacity-100 transition-opacity">
-                        MP INDUSTRIAL (ACTIVE)
-                      </div>
-                    </div>
-
-                    {/* Hotspot 3 (Rajasthan) */}
-                    <div className="absolute top-[40%] left-[30%] group cursor-pointer">
-                      <div className="w-3 h-3 bg-safety rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-safety/50" style={{ animationDelay: "0.4s" }}>
-                        <div className="w-1.5 h-1.5 bg-steel-dark rounded-full" />
-                      </div>
-                      <div className="absolute right-6 top-1/2 -translate-y-1/2 bg-steel-900 border border-steel-700 rounded px-2 py-1 text-[10px] font-mono text-white whitespace-nowrap opacity-0 group-hover:opacity-100 lg:opacity-100 transition-opacity">
-                        RAJASTHAN EPC (ACTIVE)
-                      </div>
-                    </div>
-
-                    {/* Hotspot 4 (Chhattisgarh) */}
-                    <div className="absolute top-[75%] left-[65%] group cursor-pointer">
-                      <div className="w-3 h-3 bg-safety rounded-full flex items-center justify-center animate-bounce shadow-lg shadow-safety/50" style={{ animationDelay: "0.6s" }}>
-                        <div className="w-1.5 h-1.5 bg-steel-dark rounded-full" />
-                      </div>
-                      <div className="absolute left-6 top-1/2 -translate-y-1/2 bg-steel-900 border border-steel-700 rounded px-2 py-1 text-[10px] font-mono text-white whitespace-nowrap opacity-0 group-hover:opacity-100 lg:opacity-100 transition-opacity">
-                        CG POWER & STEEL (ACTIVE)
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Bottom metrics */}
-                  <div className="flex justify-between items-end border-t border-white/5 pt-2 relative z-10">
-                    <div className="text-[10px] font-mono text-white/40">
-                      MOBILIZATION NETWORK: 100% SECURE
-                    </div>
-                    <div className="text-[10px] font-mono text-safety uppercase">
-                      STANDARDS: IS 3696 &amp; OSHA
-                    </div>
-                  </div>
-                </div>
-              </div>
+      {/* Map */}
+      <section className="bg-steel-50 section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="Find Us"
+            title="Based in Sayan, Surat — Gujarat's industrial belt"
+            description="Close to the refinery, petrochemical and chemical corridor, with crews mobilising to project sites across India."
+          />
+          <Reveal delay={0.15}>
+            <div className="mt-12 overflow-hidden rounded-2xl border border-steel-200 shadow-[0_24px_52px_-28px_rgba(20,23,28,0.4)]">
+              <iframe
+                src={mapSrc}
+                title={`Map showing ${COMPANY.name} location in ${COMPANY.address.line1}`}
+                width="100%"
+                height="440"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+                className="block w-full grayscale-[0.25] transition-all duration-500 hover:grayscale-0"
+              />
             </div>
-          </ScrollReveal>
+          </Reveal>
         </div>
       </section>
     </>

@@ -1,132 +1,160 @@
 "use client";
 
-import { useState } from "react";
-import PageHeader from "@/components/PageHeader";
-import ScrollReveal from "@/components/ScrollReveal";
-import CTABanner from "@/components/CTABanner";
-import PlaceholderImage from "@/components/PlaceholderImage";
-import { projects } from "@/data/content";
+import Image from "next/image";
+import { useMemo, useState } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 
-const categories = ["All", "Industrial", "Commercial", "Infrastructure", "Residential"];
+import PageHero from "@/components/PageHero";
+import SectionHeading from "@/components/SectionHeading";
+import CTASection from "@/components/CTASection";
+import ClientMarquee from "@/components/ClientMarquee";
+import Icon from "@/components/Icon";
+import Reveal from "@/components/Reveal";
+import { projects, projectCategories } from "@/data/content";
 
 export default function ProjectsPage() {
-  const [activeCategory, setActiveCategory] = useState("All");
+  const [active, setActive] = useState("All");
 
-  const filteredProjects =
-    activeCategory === "All"
-      ? projects
-      : projects.filter((p) => p.category === activeCategory);
+  const filtered = useMemo(
+    () => (active === "All" ? projects : projects.filter((p) => p.category === active)),
+    [active]
+  );
+
+  const counts = useMemo(() => {
+    const m: Record<string, number> = { All: projects.length };
+    for (const p of projects) m[p.category] = (m[p.category] ?? 0) + 1;
+    return m;
+  }, []);
 
   return (
     <>
-      <PageHeader
-        title="Our Projects"
-        subtitle="Explore our project portfolio across industrial, commercial, infrastructure, and residential sectors. Real project photos will be added as they become available."
+      <PageHero
+        breadcrumb="Projects"
+        eyebrow="Selected Work"
+        title="Access, coating and insulation packages we have delivered"
+        description="A representative portfolio across refineries, petrochemical and chemical plants, cement works, infrastructure and building construction. Client identities are described by sector where confidentiality applies."
+        image="/images/project-refinery.jpg"
+        chips={["Oil & Gas", "Petrochemical", "Cement", "Infrastructure", "Building Construction"]}
       />
 
-      {/* Filter + Grid */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Category Filter */}
-          <ScrollReveal>
-            <div className="flex flex-wrap justify-center gap-2 mb-12">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className={`px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 ${
-                    activeCategory === cat
-                      ? "bg-safety text-steel-dark shadow-md"
-                      : "bg-steel-50 text-steel-500 hover:bg-steel-100 hover:text-steel-dark"
-                  }`}
-                >
-                  {cat}
-                </button>
-              ))}
+      <section className="section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="Project Portfolio"
+            title="Filter by sector"
+            description="Each entry shows the discipline, the system used and what the scope actually involved."
+          />
+
+          {/* Filters */}
+          <Reveal delay={0.12}>
+            <div className="mt-10 flex flex-wrap justify-center gap-2.5">
+              {projectCategories.map((cat) => {
+                const isOn = active === cat;
+                return (
+                  <button
+                    key={cat}
+                    type="button"
+                    onClick={() => setActive(cat)}
+                    aria-pressed={isOn}
+                    className={`relative rounded-full border px-4 py-2 text-[0.82rem] font-semibold transition-all duration-300 ${
+                      isOn
+                        ? "border-steel-950 bg-steel-950 text-white shadow-lg"
+                        : "border-steel-200 bg-white text-steel-600 hover:border-safety hover:bg-safety-50 hover:text-steel-950"
+                    }`}
+                  >
+                    {cat}
+                    <span
+                      className={`ml-2 rounded-full px-1.5 py-0.5 text-[0.65rem] font-bold ${
+                        isOn ? "bg-safety text-steel-950" : "bg-steel-100 text-steel-500"
+                      }`}
+                    >
+                      {counts[cat] ?? 0}
+                    </span>
+                  </button>
+                );
+              })}
             </div>
-          </ScrollReveal>
+          </Reveal>
 
-          {/* Project Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filteredProjects.map((project, i) => (
-              <ScrollReveal key={project.id} delay={i * 0.08}>
-                <div className="group bg-white rounded-xl border border-steel-100 overflow-hidden
-                                card-hover hover:border-safety/30">
-                  {/* Image Placeholder */}
-                  <div className="relative">
-                    <PlaceholderImage label={project.title} src={project.src} />
-                    {/* Overlay on hover */}
-                    <div className="absolute inset-0 bg-steel-dark/80 opacity-0 group-hover:opacity-100
-                                    transition-opacity duration-300 flex items-center justify-center p-6">
-                      <p className="text-white/80 text-sm text-center leading-relaxed">
-                        {project.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  {/* Info */}
-                  <div className="p-5">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="text-xs font-semibold text-safety uppercase tracking-wider
-                                       bg-safety-50 px-2 py-0.5 rounded-full">
-                        {project.scaffoldingType}
-                      </span>
-                      <span className="text-xs text-steel-400">{project.category}</span>
-                    </div>
-                    <h3 className="text-lg font-bold text-steel-dark">{project.title}</h3>
-                    <p className="mt-1.5 text-sm text-steel-500 flex items-center gap-1.5">
-                      <svg className="w-4 h-4 text-steel-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                      </svg>
-                      {project.location}
+          {/* Grid */}
+          <motion.div layout className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((p) => (
+                <motion.article
+                  key={p.id}
+                  layout
+                  initial={{ opacity: 0, scale: 0.94, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.94, y: -12 }}
+                  transition={{ duration: 0.42, ease: [0.22, 1, 0.36, 1] }}
+                  className="card img-zoom group flex flex-col overflow-hidden"
+                >
+                  <div className="relative aspect-[16/10] overflow-hidden bg-steel-100">
+                    <Image
+                      src={p.src}
+                      alt={p.title}
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-steel-950/75 via-steel-950/10 to-transparent" />
+                    <span className="absolute left-3.5 top-3.5 rounded-full bg-safety px-2.5 py-1 text-[0.64rem] font-bold uppercase tracking-wider text-steel-950">
+                      {p.category}
+                    </span>
+                    <span className="absolute right-3.5 top-3.5 rounded-full bg-white/95 px-2.5 py-1 text-[0.64rem] font-bold uppercase tracking-wider text-steel-900 backdrop-blur">
+                      {p.discipline}
+                    </span>
+                    <p className="absolute bottom-3.5 left-3.5 flex items-center gap-1.5 text-[0.75rem] font-medium text-white/90">
+                      <Icon name="map" size={13} className="text-safety" />
+                      {p.location}
                     </p>
                   </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
 
-          {/* Empty state */}
-          {filteredProjects.length === 0 && (
-            <div className="text-center py-16">
-              <p className="text-steel-400">No projects found in this category yet.</p>
-            </div>
+                  <div className="flex flex-1 flex-col p-5 md:p-6">
+                    <span className="text-[0.68rem] font-bold uppercase tracking-wider text-safety-700">
+                      {p.scope}
+                    </span>
+                    <h3 className="mt-2 text-[1.05rem] font-bold leading-snug text-steel-950">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2.5 text-[0.875rem] leading-relaxed text-steel-500 pretty">
+                      {p.description}
+                    </p>
+                    <ul className="mt-4 space-y-2 border-t border-steel-100 pt-4">
+                      {p.highlights.map((h) => (
+                        <li key={h} className="flex gap-2 text-[0.8rem] leading-snug text-steel-600">
+                          <Icon name="check" size={14} className="mt-0.5 shrink-0 text-safety-600" />
+                          <span className="pretty">{h}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.article>
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {filtered.length === 0 && (
+            <p className="py-16 text-center text-steel-400">No projects in this category yet.</p>
           )}
+
+          <Reveal delay={0.1}>
+            <p className="mx-auto mt-14 max-w-2xl rounded-xl border border-steel-200 bg-steel-50 p-5 text-center text-[0.82rem] leading-relaxed text-steel-500 pretty">
+              Project photographs are representative of the type and scale of work executed. Specific
+              site imagery and detailed references can be shared on request, subject to client
+              confidentiality agreements.
+            </p>
+          </Reveal>
         </div>
       </section>
 
-      {/* Note about project photos */}
-      <section className="py-12 bg-safety/5 border-y border-safety/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="flex items-start gap-4">
-              <div className="w-10 h-10 rounded-full bg-safety/20 flex items-center justify-center flex-shrink-0">
-                <svg className="w-5 h-5 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <div>
-                <h4 className="text-sm font-semibold text-safety-700 uppercase tracking-wider">
-                  Photo Update Schedule
-                </h4>
-                <p className="mt-1 text-sm text-steel-500">
-                  Project photos are being compiled and will be uploaded to this gallery on an ongoing basis. 
-                  All card placeholders are pre-configured — simply replace the placeholder component with an{" "}
-                  <code className="bg-steel-100 px-1.5 py-0.5 rounded text-xs">&lt;Image&gt;</code> tag once 
-                  real project photographs are available. Each card already contains accurate project 
-                  metadata (scaffolding type, location, and description).
-                </p>
-              </div>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
+      <ClientMarquee />
 
-      <CTABanner
-        title="Want to see your project type here?"
-        subtitle="Share your project requirements and we'll provide relevant case studies and references from similar projects we've executed."
-        buttonText="Discuss Your Project"
+      <CTASection
+        eyebrow="Your Project Next"
+        title="Have a similar scope coming up?"
+        description="Send the drawings, the structure details and your dates. We will tell you what system fits, how many people it needs and what it costs."
       />
     </>
   );

@@ -1,410 +1,372 @@
-"use client";
-
 import Link from "next/link";
-import ScrollReveal from "@/components/ScrollReveal";
-import StatsCounter from "@/components/StatsCounter";
-import CTABanner from "@/components/CTABanner";
+import Image from "next/image";
+import type { Metadata } from "next";
+
+import Hero from "@/components/Hero";
+import StatsStrip from "@/components/StatsStrip";
+import ClientMarquee from "@/components/ClientMarquee";
+import SectionHeading from "@/components/SectionHeading";
 import ServiceCard from "@/components/ServiceCard";
-import IndustryCard from "@/components/IndustryCard";
-import PlaceholderImage from "@/components/PlaceholderImage";
-import { services } from "@/data/services";
-import { differentiators, safetyStandards, clientIndustries } from "@/data/content";
-import { industries as allIndustries } from "@/data/content";
+import CTASection from "@/components/CTASection";
+import Icon from "@/components/Icon";
+import Reveal, { Stagger, StaggerItem } from "@/components/Reveal";
 
-const quickServices = [
-  {
-    title: "Erection & Dismantling",
-    description: "Full-cycle scaffolding lifecycle — site survey, structural planning, safe erection, and material recovery.",
-    href: "/services#erection-dismantling",
-    icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
-  },
-  {
-    title: "H-Frame Scaffolding",
-    description: "Modular frame system for building facades — fast assembly, cost-effective for mid-rise structures.",
-    href: "/services#h-frame",
-    icon: "M4 5a1 1 0 011-1h4a1 1 0 011 1v7h4V5a1 1 0 011-1h4a1 1 0 011 1v14M4 19h16",
-  },
-  {
-    title: "Tubular Scaffolding",
-    description: "Highly flexible system for irregular structures, industrial plants, and complex geometries.",
-    href: "/services#tubular",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-  },
-  {
-    title: "Cuplock Scaffolding",
-    description: "Heavy-duty system for high-rise buildings and industrial applications — 40% faster erection.",
-    href: "/services#cuplock",
-    icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
-  },
-  {
-    title: "Supply & Service",
-    description: "Scaffolding material on rent or sale with delivery, technical support, and maintenance.",
-    href: "/services#supply-service",
-    icon: "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4",
-  },
-];
+import { services, disciplines } from "@/data/services";
+import { differentiators, processSteps, industries, projects, commitments } from "@/data/content";
 
-export default function Home() {
+export const metadata: Metadata = {
+  title: "Kamal Engineering | Scaffolding, Painting & Insulation Services in India",
+  description:
+    "Scaffolding erection & dismantling, industrial protective painting and thermal insulation for refineries, chemical plants and construction projects across India. Based in Sayan, Surat, Gujarat.",
+};
+
+export default function HomePage() {
   return (
     <>
-      {/* ==================== HERO SECTION ==================== */}
-      <section className="relative gradient-hero grid-pattern min-h-screen flex items-center overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-safety via-safety-400 to-transparent" />
-        <div className="absolute top-20 right-0 w-96 h-96 bg-safety/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-0 w-80 h-80 bg-safety/3 rounded-full blur-3xl" />
-        
-        {/* Structural line decoration */}
-        <div className="absolute top-0 right-0 w-64 h-full hidden lg:block">
-          <div className="absolute top-1/4 right-0 w-px h-32 bg-safety/10" />
-          <div className="absolute top-1/3 right-4 w-px h-24 bg-safety/5" />
-          <div className="absolute bottom-1/3 right-8 w-px h-20 bg-safety/10" />
-        </div>
+      <Hero />
 
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 sm:py-40 relative z-10 w-full">
-          <div className="max-w-3xl">
-            <ScrollReveal>
-              <div className="flex items-center gap-3 mb-6">
-                <div className="accent-line" />
-                <span className="text-safety text-sm font-semibold uppercase tracking-wider">
-                  Professional Scaffolding Services
-                </span>
-              </div>
-            </ScrollReveal>
+      {/* ============ DISCIPLINES ============ */}
+      <section className="relative section-y">
+        <div className="bg-dots absolute inset-0 opacity-45" aria-hidden />
+        <div className="container-x relative">
+          <SectionHeading
+            align="center"
+            eyebrow="Three Disciplines, One Contractor"
+            title={
+              <>
+                Access, protection and insulation —{" "}
+                <span className="text-safety-600">without the interface gaps</span>
+              </>
+            }
+            description="Most sites juggle a scaffolding vendor, a painting vendor and an insulation vendor, then spend the shutdown chasing coordination between them. We do all three under a single work order and a single point of contact."
+          />
 
-            <ScrollReveal delay={0.1}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight tracking-tight text-balance">
-                Engineered Scaffolding Solutions for India&apos;s{" "}
-                <span className="text-safety">Construction &amp; Industrial</span>{" "}
-                Projects
-              </h1>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.2}>
-              <p className="mt-6 text-lg sm:text-xl text-white/60 max-w-2xl leading-relaxed text-balance">
-                Full-cycle scaffolding services — erection, dismantling, supply &amp; 
-                maintenance — with trained crews, safety-compliant practices, and 
-                faster mobilization than traditional scaffolding contractors.
-              </p>
-            </ScrollReveal>
-
-            <ScrollReveal delay={0.35}>
-              <div className="mt-8 flex flex-wrap gap-4">
-                <Link href="/contact" className="btn-primary text-base px-8 py-3.5">
-                  Get a Quote
-                  <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-                <Link href="/services" className="btn-outline text-base px-8 py-3.5 border-white/30 text-white hover:bg-white hover:text-steel-dark">
-                  Our Services
-                </Link>
-              </div>
-            </ScrollReveal>
-
-            {/* Trust indicators */}
-            <ScrollReveal delay={0.45}>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <span className="safety-badge">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                  </svg>
-                  IS 3696 Compliant
-                </span>
-                <span className="safety-badge">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z" />
-                  </svg>
-                  Trained Crew
-                </span>
-                <span className="safety-badge">
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                  Fast Mobilization
-                </span>
-              </div>
-            </ScrollReveal>
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== QUICK SERVICE ICONS ROW ==================== */}
-      <section className="relative -mt-16 pb-8 z-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-            {quickServices.map((svc, i) => (
-              <ScrollReveal key={svc.href} delay={i * 0.08} direction="up">
-                <Link
-                  href={svc.href}
-                  className="group block bg-white rounded-xl shadow-lg shadow-steel-dark/5 p-4 sm:p-5
-                             border border-steel-100 card-hover hover:border-safety/40 hover:shadow-xl"
-                >
-                  <div className="w-10 h-10 rounded-lg bg-safety/10 flex items-center justify-center mb-3
-                                  group-hover:bg-safety/20 transition-colors">
-                    <svg className="w-5 h-5 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={svc.icon} />
-                    </svg>
+          <Stagger className="mt-14 grid gap-6 md:grid-cols-3" gap={0.12}>
+            {disciplines.map((d) => (
+              <StaggerItem key={d.name}>
+                <Link href={d.href} className="card img-zoom group block h-full overflow-hidden">
+                  <div className="relative aspect-[16/11] overflow-hidden bg-steel-100">
+                    <Image
+                      src={d.image}
+                      alt={d.name}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-steel-950/85 via-steel-950/25 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 p-5">
+                      <span className="grid h-12 w-12 place-items-center rounded-xl bg-safety text-steel-950 shadow-xl">
+                        <Icon name={d.icon} size={23} />
+                      </span>
+                      <h3 className="mt-3.5 text-[1.4rem] font-bold text-white">{d.name}</h3>
+                      <p className="mt-0.5 text-[0.775rem] font-semibold uppercase tracking-wider text-safety-300">
+                        {d.tagline}
+                      </p>
+                    </div>
                   </div>
-                  <h3 className="text-sm font-bold text-steel-dark group-hover:text-steel transition-colors leading-tight">
-                    {svc.title}
-                  </h3>
-                  <p className="mt-1.5 text-xs text-steel-400 leading-relaxed line-clamp-2">
-                    {svc.description}
-                  </p>
-                </Link>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== WHY CHOOSE US ==================== */}
-      <section className="section-padding bg-steel-50/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <ScrollReveal>
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="section-title text-balance">Why Choose Kamal Engineering</h2>
-              <p className="section-subtitle mx-auto text-balance">
-                We are not just another scaffolding contractor. Our process-driven approach, trained workforce, 
-                and multi-system expertise deliver better safety, speed, and reliability for your project.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {differentiators.map((diff, i) => (
-              <ScrollReveal key={diff.title} delay={i * 0.1}>
-                <div className="group bg-white rounded-xl border border-steel-100 p-6 sm:p-7
-                                card-hover hover:border-safety/30 h-full">
-                  <div className="w-12 h-12 rounded-xl bg-safety/10 flex items-center justify-center mb-5
-                                  group-hover:bg-safety/20 transition-colors">
-                    <svg className="w-6 h-6 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={diff.icon} />
-                    </svg>
-                  </div>
-                  <h3 className="text-lg font-bold text-steel-dark mb-2">{diff.title}</h3>
-                  <p className="text-sm text-steel-500 leading-relaxed">{diff.description}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== STATS COUNTER STRIP ==================== */}
-      <StatsCounter />
-
-      {/* ==================== FEATURED SERVICES (DETAILED CARDS) ==================== */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <ScrollReveal>
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="section-title">Our Scaffolding Systems</h2>
-              <p className="section-subtitle mx-auto">
-                Comprehensive scaffolding solutions designed for different applications — 
-                from simple building facades to complex industrial plant access.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((service, i) => (
-              <ServiceCard key={service.id} service={service} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== INDUSTRIES SERVED ==================== */}
-      <section className="section-padding bg-steel-dark text-white relative overflow-hidden grid-pattern">
-        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-safety via-safety-400 to-transparent" />
-        <div className="absolute top-0 right-0 w-96 h-96 bg-safety/5 rounded-full blur-3xl" />
-        
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center mb-16">
-            <ScrollReveal>
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white tracking-tight">
-                Industries We Serve
-              </h2>
-              <p className="mt-4 text-lg text-white/60 max-w-2xl mx-auto">
-                From construction and real estate to heavy industrial plants and infrastructure — 
-                our scaffolding systems support projects across sectors.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {allIndustries.map((industry, i) => (
-              <div key={industry.id}>
-                <IndustryCard industry={industry} index={i} />
-              </div>
-            ))}
-          </div>
-
-          <ScrollReveal delay={0.4}>
-            <div className="mt-14 text-center">
-              <Link
-                href="/industries"
-                className="inline-flex items-center gap-2 text-safety hover:text-safety-400 font-semibold transition-colors"
-              >
-                View all industries and applications
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ==================== CLIENT INDUSTRY TYPES (TRUST STRIP) ==================== */}
-      <section className="py-14 bg-white border-y border-steel-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <p className="text-center text-sm font-semibold text-steel-400 uppercase tracking-wider mb-8">
-              Supporting Projects Across Industries
-            </p>
-          </ScrollReveal>
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-            {clientIndustries.map((ci, i) => (
-              <ScrollReveal key={ci.id} delay={i * 0.1}>
-                <div className="flex flex-col items-center text-center gap-3 p-4 rounded-xl
-                                hover:bg-steel-50 transition-colors group">
-                  <div className="w-12 h-12 rounded-full bg-safety/10 flex items-center justify-center
-                                  group-hover:bg-safety/20 transition-colors">
-                    <svg className="w-6 h-6 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={ci.icon} />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-semibold text-steel-dark text-sm">{ci.title}</p>
-                    <p className="text-xs text-steel-400 mt-0.5">{ci.description}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ==================== SAFETY TRUST STRIP ==================== */}
-      <section className="py-16 bg-safety/5">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <ScrollReveal>
-            <div className="text-center mb-10">
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="text-2xl sm:text-3xl font-bold text-steel-dark">
-                Safety Standards We Follow
-              </h2>
-            </div>
-          </ScrollReveal>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {safetyStandards.slice(0, 6).map((std, i) => (
-              <ScrollReveal key={std.title} delay={i * 0.08}>
-                <div className="flex items-start gap-3 bg-white rounded-lg p-4 border border-steel-100
-                                hover:border-safety/30 transition-colors">
-                  <div className="w-10 h-10 rounded-lg bg-safety/10 flex items-center justify-center flex-shrink-0">
-                    <svg className="w-5 h-5 text-safety" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d={std.icon} />
-                    </svg>
-                  </div>
-                  <div>
-                    <h4 className="font-semibold text-steel-dark text-sm">{std.title}</h4>
-                    <p className="text-xs text-steel-400 mt-1 line-clamp-2">{std.description}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-          <ScrollReveal delay={0.3}>
-            <div className="mt-8 text-center">
-              <Link
-                href="/safety"
-                className="inline-flex items-center gap-2 text-safety hover:text-safety-600 font-semibold text-sm transition-colors"
-              >
-                View our complete safety & compliance framework
-                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </Link>
-            </div>
-          </ScrollReveal>
-        </div>
-      </section>
-
-      {/* ==================== PROJECT SHOWCASE PREVIEW ==================== */}
-      <section className="section-padding">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <ScrollReveal>
-              <div className="accent-line mx-auto mb-6" />
-              <h2 className="section-title">Project Experience</h2>
-              <p className="section-subtitle mx-auto">
-                From industrial plant shutdowns to high-rise residential towers — 
-                see the types of projects we support.
-              </p>
-            </ScrollReveal>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              {
-                title: "Industrial Plant Shutdown",
-                type: "Cuplock",
-                location: "Cement Plant, Madhya Pradesh",
-                label: "Industrial Plant Shutdown Scaffolding",
-                src: "/images/project-cement.jpg",
-              },
-              {
-                title: "Commercial Building Facade",
-                type: "H-Frame",
-                location: "Commercial Complex, Uttar Pradesh",
-                label: "Commercial Building Facade Work",
-                src: "/images/project-facade.jpg",
-              },
-              {
-                title: "Bridge Inspection Access",
-                type: "Tubular",
-                location: "Highway Bridge, Rajasthan",
-                label: "Bridge Inspection & Repair Access",
-                src: "/images/project-bridge.jpg",
-              },
-            ].map((proj, i) => (
-              <ScrollReveal key={proj.title} delay={i * 0.15}>
-                <div className="group bg-white rounded-xl border border-steel-100 overflow-hidden
-                                card-hover hover:border-safety/30">
-                  <PlaceholderImage label={proj.label} src={proj.src} />
-                  <div className="p-5">
-                    <span className="text-xs font-semibold text-safety uppercase tracking-wider">
-                      {proj.type}
+                  <div className="p-5 md:p-6">
+                    <p className="text-[0.9rem] leading-relaxed text-steel-500 pretty">{d.blurb}</p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-[0.8rem] font-bold uppercase tracking-wider text-steel-950">
+                      Learn more
+                      <Icon
+                        name="arrow"
+                        size={15}
+                        className="text-safety transition-transform duration-300 group-hover:translate-x-1.5"
+                      />
                     </span>
-                    <h3 className="mt-1 text-lg font-bold text-steel-dark">{proj.title}</h3>
-                    <p className="mt-1 text-sm text-steel-400">{proj.location}</p>
                   </div>
-                </div>
-              </ScrollReveal>
+                </Link>
+              </StaggerItem>
             ))}
-          </div>
-
-          <ScrollReveal delay={0.3}>
-            <div className="mt-10 text-center">
-              <Link href="/projects" className="btn-outline">
-                View All Projects
-                <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </ScrollReveal>
+          </Stagger>
         </div>
       </section>
 
-      {/* ==================== CTA BANNER ==================== */}
-      <CTABanner />
+      <StatsStrip />
+
+      {/* ============ SERVICES ============ */}
+      <section className="bg-steel-50 section-y">
+        <div className="container-x">
+          <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="What We Do"
+              title="A complete service catalogue for industrial and construction sites"
+              description="From a single mobile tower to a full refinery turnaround access package — with the coating and insulation scope handled by the same team."
+            />
+            <Reveal delay={0.2}>
+              <Link href="/services" className="btn btn-dark shrink-0">
+                All Services
+                <Icon name="arrow" size={17} />
+              </Link>
+            </Reveal>
+          </div>
+
+          <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" gap={0.08}>
+            {services.map((s) => (
+              <StaggerItem key={s.id} className="h-full">
+                <ServiceCard service={s} />
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ============ WHY US ============ */}
+      <section className="relative overflow-hidden bg-steel-950 section-y">
+        <div className="bg-grid absolute inset-0 opacity-70" aria-hidden />
+        <div
+          className="absolute -right-40 top-1/4 h-[30rem] w-[30rem] rounded-full bg-safety/[0.07] blur-3xl"
+          aria-hidden
+        />
+        <div className="container-x relative">
+          <SectionHeading
+            dark
+            align="center"
+            eyebrow="Why Clients Choose Us"
+            title="Built for plants that cannot afford surprises"
+            description="Heavy industry does not reward improvisation. Everything below is about removing the variables that turn a two-week shutdown into a three-week one."
+          />
+
+          <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" gap={0.08}>
+            {differentiators.map((d) => (
+              <StaggerItem key={d.title} className="h-full">
+                <div className="card-dark group h-full p-6 md:p-7">
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-safety/12 text-safety transition-all duration-300 group-hover:bg-safety group-hover:text-steel-950">
+                    <Icon name={d.icon} size={22} />
+                  </span>
+                  <h3 className="mt-5 text-[1.075rem] font-bold text-white">{d.title}</h3>
+                  <p className="mt-2.5 text-[0.9rem] leading-relaxed text-steel-400 pretty">
+                    {d.description}
+                  </p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+
+          {/* Commitments */}
+          <Stagger className="mt-14 grid gap-5 md:grid-cols-3" gap={0.1}>
+            {commitments.map((c) => (
+              <StaggerItem key={c.label}>
+                <div className="rounded-2xl border border-safety/20 bg-safety/[0.05] p-6 text-center">
+                  <div className="font-sans text-[2rem] font-extrabold leading-none text-safety">
+                    {c.stat}
+                  </div>
+                  <div className="mt-2.5 text-[0.9rem] font-bold text-white">{c.label}</div>
+                  <p className="mt-2 text-[0.8rem] leading-relaxed text-steel-400 pretty">{c.detail}</p>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      <ClientMarquee />
+
+      {/* ============ PROCESS ============ */}
+      <section className="section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="How We Work"
+            title="From first call to final material reconciliation"
+            description="A predictable five-step sequence. You always know what happens next and who is responsible for it."
+          />
+
+          <div className="relative mt-16">
+            <div
+              className="absolute left-[1.4rem] top-3 hidden h-[calc(100%-2rem)] w-px bg-gradient-to-b from-safety via-steel-200 to-transparent md:block lg:left-1/2 lg:-translate-x-px"
+              aria-hidden
+            />
+            <ol className="space-y-8 lg:space-y-0">
+              {processSteps.map((step, i) => {
+                const right = i % 2 === 1;
+                return (
+                  <li key={step.step} className="relative">
+                    <Reveal direction={right ? "left" : "right"} delay={0.05}>
+                      <div
+                        className={`flex gap-5 md:gap-7 lg:w-[calc(50%+1.5rem)] ${
+                          right ? "lg:ml-auto lg:flex-row" : "lg:flex-row-reverse lg:text-right"
+                        }`}
+                      >
+                        <div className="relative z-10 shrink-0">
+                          <span className="grid h-[2.8rem] w-[2.8rem] place-items-center rounded-full border-[3px] border-white bg-steel-950 text-safety shadow-[0_0_0_3px_rgba(245,166,35,0.25)]">
+                            <Icon name={step.icon} size={19} />
+                          </span>
+                        </div>
+                        <div className={`flex-1 pb-8 lg:pb-14 ${right ? "" : "lg:pr-2"}`}>
+                          <span className="font-sans text-[0.7rem] font-extrabold tracking-[0.2em] text-safety-600">
+                            STEP {step.step}
+                          </span>
+                          <h3 className="mt-1.5 text-[1.15rem] font-bold text-steel-950">
+                            {step.title}
+                          </h3>
+                          <p className="mt-2.5 text-[0.9rem] leading-relaxed text-steel-500 pretty">
+                            {step.description}
+                          </p>
+                        </div>
+                      </div>
+                    </Reveal>
+                  </li>
+                );
+              })}
+            </ol>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SAFETY BANNER ============ */}
+      <section className="relative isolate overflow-hidden">
+        <Image
+          src="/images/safety-toolbox.jpg"
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-steel-950 via-steel-950/90 to-steel-950/45" />
+        <div className="container-x relative section-y">
+          <div className="max-w-2xl">
+            <Reveal>
+              <span className="eyebrow-light">
+                <span className="h-px w-7 bg-safety-400" />
+                Safety First, Always
+              </span>
+            </Reveal>
+            <Reveal delay={0.08}>
+              <h2 className="h-section mt-4 !text-white balance">
+                A scaffold is only finished when it carries a green tag
+              </h2>
+            </Reveal>
+            <Reveal delay={0.16}>
+              <p className="mt-5 text-[1.0625rem] leading-relaxed text-steel-300 pretty">
+                Full body harness above 1.8m, no exceptions. Work only under a valid permit. Daily
+                toolbox talks with recorded attendance. Damaged material quarantined, not
+                &ldquo;managed&rdquo;. This is the baseline we work to, not a marketing line.
+              </p>
+            </Reveal>
+            <Reveal delay={0.24}>
+              <div className="mt-8 grid gap-3 sm:grid-cols-2">
+                {[
+                  "IS 3696 & IS 4014 practice",
+                  "Permit-to-work compliance",
+                  "Green / red scaffold tagging",
+                  "Documented inspection register",
+                ].map((t) => (
+                  <span
+                    key={t}
+                    className="flex items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.05] px-3.5 py-2.5 text-[0.85rem] font-medium text-steel-200 backdrop-blur-sm"
+                  >
+                    <Icon name="check" size={16} className="shrink-0 text-safety" />
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </Reveal>
+            <Reveal delay={0.32}>
+              <Link href="/safety" className="btn btn-amber mt-8">
+                Our Safety Approach
+                <Icon name="arrow" size={17} />
+              </Link>
+            </Reveal>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ PROJECTS ============ */}
+      <section className="bg-steel-50 section-y">
+        <div className="container-x">
+          <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+            <SectionHeading
+              eyebrow="Selected Work"
+              title="Projects across refineries, plants and construction sites"
+              description="A representative sample of the access, coating and insulation packages we have delivered."
+            />
+            <Reveal delay={0.2}>
+              <Link href="/projects" className="btn btn-dark shrink-0">
+                View All Projects
+                <Icon name="arrow" size={17} />
+              </Link>
+            </Reveal>
+          </div>
+
+          <Stagger className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3" gap={0.09}>
+            {projects.slice(0, 6).map((p) => (
+              <StaggerItem key={p.id} className="h-full">
+                <article className="card img-zoom group flex h-full flex-col overflow-hidden">
+                  <div className="relative aspect-[16/10] overflow-hidden bg-steel-100">
+                    <Image
+                      src={p.src}
+                      alt={p.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, 33vw"
+                      className="object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-steel-950/60 to-transparent" />
+                    <span className="absolute left-3.5 top-3.5 rounded-full bg-safety px-2.5 py-1 text-[0.65rem] font-bold uppercase tracking-wider text-steel-950">
+                      {p.category}
+                    </span>
+                  </div>
+                  <div className="flex flex-1 flex-col p-5 md:p-6">
+                    <span className="text-[0.7rem] font-bold uppercase tracking-wider text-safety-700">
+                      {p.scope}
+                    </span>
+                    <h3 className="mt-2 text-[1.05rem] font-bold leading-snug text-steel-950">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 flex items-center gap-1.5 text-[0.8rem] text-steel-400">
+                      <Icon name="map" size={13} />
+                      {p.location}
+                    </p>
+                    <p className="mt-3 flex-1 text-[0.875rem] leading-relaxed text-steel-500 pretty">
+                      {p.description}
+                    </p>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* ============ INDUSTRIES ============ */}
+      <section className="section-y">
+        <div className="container-x">
+          <SectionHeading
+            align="center"
+            eyebrow="Sectors We Serve"
+            title="Industries that depend on access, protection and insulation"
+          />
+
+          <Stagger className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3" gap={0.07}>
+            {industries.map((ind) => (
+              <StaggerItem key={ind.id} className="h-full">
+                <Link
+                  href={`/industries#${ind.id}`}
+                  className="card group flex h-full flex-col p-6 md:p-7"
+                >
+                  <span className="grid h-12 w-12 place-items-center rounded-xl bg-steel-950 text-safety transition-all duration-300 group-hover:bg-safety group-hover:text-steel-950">
+                    <Icon name={ind.icon} size={22} />
+                  </span>
+                  <h3 className="mt-5 text-[1.075rem] font-bold text-steel-950">{ind.title}</h3>
+                  <p className="mt-2.5 flex-1 text-[0.875rem] leading-relaxed text-steel-500 pretty">
+                    {ind.description}
+                  </p>
+                  <span className="mt-5 inline-flex items-center gap-2 text-[0.78rem] font-bold uppercase tracking-wider text-steel-950">
+                    Details
+                    <Icon
+                      name="arrow"
+                      size={14}
+                      className="text-safety transition-transform duration-300 group-hover:translate-x-1.5"
+                    />
+                  </span>
+                </Link>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      <CTASection />
     </>
   );
 }
