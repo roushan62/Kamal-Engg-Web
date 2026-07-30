@@ -3,7 +3,6 @@
 import { useState } from "react";
 import PageHeader from "@/components/PageHeader";
 import ScrollReveal from "@/components/ScrollReveal";
-import CTABanner from "@/components/CTABanner";
 import { faqs } from "@/data/content";
 import { TEAM } from "@/lib/constants";
 

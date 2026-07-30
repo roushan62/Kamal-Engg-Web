@@ -1,311 +1,445 @@
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export const runtime = "nodejs";
+
+const DEFAULT_RECIPIENT_EMAIL = "sales.kamalengg01@gmail.com";
+const MAX_LENGTH = {
+  name: 80,
+  company: 120,
+  email: 120,
+  phone: 30,
+  service: 100,
+  message: 1500,
+};
+
+type ContactPayload = {
+  name?: unknown;
+  company?: unknown;
+  email?: unknown;
+  phone?: unknown;
+  service?: unknown;
+  message?: unknown;
+  botcheck?: unknown;
+};
+
+type CleanContact = {
+  name: string;
+  company: string;
+  email: string;
+  phone: string;
+  service: string;
+  message: string;
+};
+
+type DeliveryService = {
+  name: string;
+  send: () => Promise<void>;
+};
+
+function normalizeText(value: unknown, maxLength: number) {
+  if (typeof value !== "string") return "";
+
+  return value
+    .replace(/\r\n/g, "\n")
+    .replace(/\r/g, "\n")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function escapeHtml(value: string) {
+  return value.replace(/[&<>"']/g, (character) => {
+    const entities: Record<string, string> = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;",
+    };
+
+    return entities[character] ?? character;
+  });
+}
+
+function getClientIp(request: NextRequest) {
+  return (
+    request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    request.headers.get("x-real-ip") ||
+    "Not available"
+  );
+}
+
+function isValidEmail(email: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+function isValidPhone(phone: string) {
+  return /^[+()\-\s\d]{7,30}$/.test(phone);
+}
+
+function validatePayload(payload: ContactPayload) {
+  const honeypot = normalizeText(payload.botcheck, 200);
+
+  if (honeypot) {
+    return {
+      error: "Spam submission blocked.",
+    };
+  }
+
+  const contact: CleanContact = {
+    name: normalizeText(payload.name, MAX_LENGTH.name),
+    company: normalizeText(payload.company, MAX_LENGTH.company),
+    email: normalizeText(payload.email, MAX_LENGTH.email).toLowerCase(),
+    phone: normalizeText(payload.phone, MAX_LENGTH.phone),
+    service: normalizeText(payload.service, MAX_LENGTH.service),
+    message: normalizeText(payload.message, MAX_LENGTH.message),
+  };
+
+  if (!contact.name || !contact.email || !contact.phone || !contact.service || !contact.message) {
+    return {
+      error: "Please fill all required fields: name, email, phone, service and message.",
+    };
+  }
+
+  if (!isValidEmail(contact.email)) {
+    return { error: "Please enter a valid email address." };
+  }
+
+  if (!isValidPhone(contact.phone)) {
+    return { error: "Please enter a valid phone number." };
+  }
+
+  if (contact.message.length < 10) {
+    return { error: "Please add a few more project details in the message." };
+  }
+
+  return { contact };
+}
+
+function buildEmailText(contact: CleanContact, submittedAt: string, sourceUrl: string, clientIp: string) {
+  return [
+    "New enquiry received from Kamal Engineering website",
+    "",
+    `Name: ${contact.name}`,
+    `Company: ${contact.company || "Not provided"}`,
+    `Email: ${contact.email}`,
+    `Phone: ${contact.phone}`,
+    `Service Required: ${contact.service}`,
+    "",
+    "Project Details / Message:",
+    contact.message,
+    "",
+    `Submitted At: ${submittedAt}`,
+    `Source URL: ${sourceUrl}`,
+    `IP Address: ${clientIp}`,
+  ].join("\n");
+}
+
+function buildEmailHtml(contact: CleanContact, submittedAt: string, sourceUrl: string, clientIp: string) {
+  const safe = {
+    name: escapeHtml(contact.name),
+    company: escapeHtml(contact.company || "Not provided"),
+    email: escapeHtml(contact.email),
+    phone: escapeHtml(contact.phone),
+    service: escapeHtml(contact.service),
+    message: escapeHtml(contact.message),
+    submittedAt: escapeHtml(submittedAt),
+    sourceUrl: escapeHtml(sourceUrl),
+    clientIp: escapeHtml(clientIp),
+  };
+
+  return `
+    <!doctype html>
+    <html>
+      <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>New Kamal Engineering Enquiry</title>
+      </head>
+      <body style="margin:0;padding:0;background:#f4f5f6;font-family:Arial,Helvetica,sans-serif;color:#2B2F36;">
+        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="background:#f4f5f6;padding:24px 12px;">
+          <tr>
+            <td align="center">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="max-width:640px;background:#ffffff;border:1px solid #e5e7ea;border-radius:12px;overflow:hidden;">
+                <tr>
+                  <td style="background:#1A1D23;color:#ffffff;padding:26px 28px;border-bottom:5px solid #F5A623;">
+                    <div style="font-size:22px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;">Kamal Engineering</div>
+                    <div style="font-size:12px;color:#F5A623;margin-top:6px;letter-spacing:1.5px;text-transform:uppercase;">New Website Enquiry</div>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="padding:28px;">
+                    <h1 style="font-size:20px;line-height:1.35;margin:0 0 18px;color:#1A1D23;">A customer submitted the contact form</h1>
+                    <p style="margin:0 0 22px;color:#5b626d;font-size:14px;line-height:1.6;">Please contact the customer using the phone or email below.</p>
+
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                      <tr>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;width:170px;color:#6b7480;font-weight:700;font-size:14px;">Name</td>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;color:#1A1D23;font-size:14px;"><strong>${safe.name}</strong></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;width:170px;color:#6b7480;font-weight:700;font-size:14px;">Company</td>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;color:#1A1D23;font-size:14px;">${safe.company}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;width:170px;color:#6b7480;font-weight:700;font-size:14px;">Email</td>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;color:#1A1D23;font-size:14px;"><a href="mailto:${safe.email}" style="color:#d98c14;font-weight:700;text-decoration:none;">${safe.email}</a></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;width:170px;color:#6b7480;font-weight:700;font-size:14px;">Phone</td>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;color:#1A1D23;font-size:14px;"><a href="tel:${safe.phone}" style="color:#1A1D23;font-weight:700;text-decoration:none;">${safe.phone}</a></td>
+                      </tr>
+                      <tr>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;width:170px;color:#6b7480;font-weight:700;font-size:14px;">Service</td>
+                        <td style="padding:12px 0;border-bottom:1px solid #e5e7ea;color:#1A1D23;font-size:14px;"><span style="display:inline-block;background:#F5A623;color:#1A1D23;font-weight:800;border-radius:999px;padding:5px 10px;font-size:12px;text-transform:uppercase;">${safe.service}</span></td>
+                      </tr>
+                    </table>
+
+                    <div style="margin-top:24px;">
+                      <div style="font-size:14px;font-weight:800;color:#6b7480;margin-bottom:10px;">Project Details / Message</div>
+                      <div style="background:#f8f9fa;border-left:5px solid #F5A623;border-radius:8px;padding:16px;color:#2B2F36;font-size:14px;line-height:1.6;white-space:pre-wrap;">${safe.message}</div>
+                    </div>
+
+                    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="margin-top:24px;border-collapse:collapse;background:#f8f9fa;border-radius:8px;">
+                      <tr>
+                        <td style="padding:10px 12px;color:#6b7480;font-size:12px;font-weight:700;width:130px;">Submitted</td>
+                        <td style="padding:10px 12px;color:#2B2F36;font-size:12px;">${safe.submittedAt}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:10px 12px;color:#6b7480;font-size:12px;font-weight:700;width:130px;">Source</td>
+                        <td style="padding:10px 12px;color:#2B2F36;font-size:12px;">${safe.sourceUrl}</td>
+                      </tr>
+                      <tr>
+                        <td style="padding:10px 12px;color:#6b7480;font-size:12px;font-weight:700;width:130px;">IP</td>
+                        <td style="padding:10px 12px;color:#2B2F36;font-size:12px;">${safe.clientIp}</td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="background:#1A1D23;color:#88909b;padding:16px 28px;text-align:center;font-size:12px;">
+                    This email was generated automatically from the Kamal Engineering website contact form.
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </body>
+    </html>
+  `;
+}
+
+async function readResponseBody(response: Response) {
+  const text = await response.text();
+
+  if (!text) return null;
+
   try {
-    const body = await request.json();
-    const { name, company, phone, service, message } = body;
+    return JSON.parse(text) as unknown;
+  } catch {
+    return text;
+  }
+}
 
-    // Validate required fields
-    if (!name || !phone || !service || !message) {
-      return NextResponse.json(
-        { error: "Missing required fields" },
-        { status: 400 }
-      );
-    }
+function getServiceError(data: unknown, fallback: string) {
+  if (typeof data === "string" && data) return data.slice(0, 300);
 
-    const recipientEmail = "sales.kamalengg01@gmail.com";
-    const subject = `[New Enquiry] Scaffolding Request from ${name}`;
+  if (data && typeof data === "object") {
+    const record = data as Record<string, unknown>;
+    const message = record.message || record.error;
 
-    // Professional HTML Email Template
-    const emailHtml = `
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8">
-          <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <title>New Scaffolding Enquiry</title>
-          <style>
-            body {
-              font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-              color: #2b2f36;
-              background-color: #f4f5f7;
-              margin: 0;
-              padding: 0;
-            }
-            .container {
-              max-width: 600px;
-              margin: 20px auto;
-              background-color: #ffffff;
-              border: 1px solid #e1e4eb;
-              border-radius: 6px;
-              overflow: hidden;
-              box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-            }
-            .header {
-              background-color: #1a1d23;
-              color: #ffffff;
-              padding: 24px;
-              border-bottom: 4px solid #f5a623;
-              text-align: center;
-            }
-            .logo-text {
-              font-size: 20px;
-              font-weight: bold;
-              letter-spacing: 1px;
-              text-transform: uppercase;
-              color: #ffffff;
-              margin: 0;
-            }
-            .logo-subtext {
-              font-size: 11px;
-              color: #f5a623;
-              margin: 4px 0 0 0;
-              letter-spacing: 2px;
-              text-transform: uppercase;
-            }
-            .content {
-              padding: 30px;
-            }
-            .title {
-              font-size: 18px;
-              font-weight: 600;
-              color: #1a1d23;
-              margin-top: 0;
-              margin-bottom: 20px;
-              border-bottom: 1px solid #e1e4eb;
-              padding-bottom: 10px;
-            }
-            .field-row {
-              margin-bottom: 15px;
-              display: flex;
-              flex-wrap: wrap;
-            }
-            .field-label {
-              width: 150px;
-              font-weight: bold;
-              color: #5d6470;
-              font-size: 14px;
-            }
-            .field-value {
-              flex: 1;
-              color: #1a1d23;
-              font-size: 14px;
-              min-width: 200px;
-            }
-            .message-box {
-              background-color: #f8f9fa;
-              border-left: 4px solid #f5a623;
-              padding: 15px;
-              margin-top: 20px;
-              font-size: 14px;
-              line-height: 1.5;
-              white-space: pre-wrap;
-              color: #2b2f36;
-            }
-            .footer {
-              background-color: #f8f9fa;
-              padding: 15px 30px;
-              font-size: 11px;
-              color: #7a8290;
-              border-top: 1px solid #e1e4eb;
-              text-align: center;
-            }
-            .footer p {
-              margin: 4px 0;
-            }
-            .action-badge {
-              display: inline-block;
-              background-color: #f5a623;
-              color: #1a1d23;
-              font-weight: bold;
-              padding: 3px 8px;
-              border-radius: 3px;
-              font-size: 12px;
-              text-transform: uppercase;
-            }
-          </style>
-        </head>
-        <body>
-          <div class="container">
-            <div class="header">
-              <div class="logo-text">Kamal Engineering</div>
-              <div class="logo-subtext">Scaffolding Erection, Dismantling & Services</div>
-            </div>
-            <div class="content">
-              <h3 class="title">New Client Enquiry Received</h3>
-              
-              <div class="field-row">
-                <div class="field-label">Name:</div>
-                <div class="field-value"><strong>${name}</strong></div>
-              </div>
-              
-              <div class="field-row">
-                <div class="field-label">Company:</div>
-                <div class="field-value">${company || "Not Provided"}</div>
-              </div>
-              
-              <div class="field-row">
-                <div class="field-label">Phone:</div>
-                <div class="field-value">
-                  <a href="tel:${phone}" style="color: #1a1d23; text-decoration: none; font-weight: bold;">
-                    ${phone}
-                  </a>
-                </div>
-              </div>
-              
-              <div class="field-row">
-                <div class="field-label">Service Type:</div>
-                <div class="field-value">
-                  <span class="action-badge">${service}</span>
-                </div>
-              </div>
-              
-              <div style="margin-top: 20px; font-weight: bold; color: #5d6470; font-size: 14px;">
-                Project Details / Message:
-              </div>
-              <div class="message-box">${message}</div>
-            </div>
-            <div class="footer">
-              <p>This email was automatically generated from the contact form on your website.</p>
-              <p>Please reply directly to the customer's phone or email coordinates.</p>
-              <p>&copy; ${new Date().getFullYear()} Kamal Engineering. All rights reserved.</p>
-            </div>
-          </div>
-        </body>
-      </html>
-    `;
+    if (typeof message === "string" && message) return message.slice(0, 300);
+  }
 
-    // Try routing via different services based on set environment variables.
-    let emailSent = false;
-    let serviceUsed = "none";
+  return fallback;
+}
 
-    // 1. RESEND INTEGRATION (Industry Standard for Vercel/Next.js)
-    if (process.env.RESEND_API_KEY) {
-      try {
-        console.log("Attempting email dispatch via Resend API...");
-        const res = await fetch("https://api.resend.com/emails", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
-          },
-          body: JSON.stringify({
-            from: "Kamal Engineering <onboarding@resend.dev>", // Or verified domain like info@kamalengg.com once DNS configured
-            to: recipientEmail,
-            subject: subject,
-            html: emailHtml,
-            reply_to: phone, // Can be customer contact
-          }),
-        });
+async function sendViaWeb3Forms(contact: CleanContact, subject: string, emailText: string, emailHtml: string) {
+  const response = await fetch("https://api.web3forms.com/submit", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      access_key: process.env.WEB3FORMS_ACCESS_KEY,
+      subject,
+      from_name: "Kamal Engineering Website",
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      company: contact.company || "Not provided",
+      service: contact.service,
+      message: emailText,
+      html: emailHtml,
+    }),
+  });
 
-        const data = await res.json();
-        if (res.ok) {
-          console.log("Resend delivery successful! ID:", data.id);
-          emailSent = true;
-          serviceUsed = "Resend";
-        } else {
-          console.error("Resend API error:", data);
-        }
-      } catch (err) {
-        console.error("Resend delivery connection failed:", err);
-      }
-    }
+  const data = await readResponseBody(response);
+  const success = Boolean(data && typeof data === "object" && "success" in data && data.success);
 
-    // 2. WEB3FORMS FALLBACK
-    if (!emailSent && process.env.WEB3FORMS_ACCESS_KEY) {
-      try {
-        console.log("Attempting email dispatch via Web3Forms API...");
-        const res = await fetch("https://api.web3forms.com/submit", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            access_key: process.env.WEB3FORMS_ACCESS_KEY,
-            name: name,
-            email: "sales.kamalengg01@gmail.com", // Since we don't have customer email always
-            subject: subject,
-            from_name: "Kamal Engineering Website",
-            message: `Name: ${name}\nCompany: ${company}\nPhone: ${phone}\nService: ${service}\n\nMessage:\n${message}`,
-            html: emailHtml,
-          }),
-        });
+  if (!response.ok || !success) {
+    throw new Error(getServiceError(data, "Web3Forms could not deliver the enquiry."));
+  }
+}
 
-        const data = await res.json();
-        if (res.ok && data.success) {
-          console.log("Web3Forms delivery successful!");
-          emailSent = true;
-          serviceUsed = "Web3Forms";
-        } else {
-          console.error("Web3Forms API error:", data);
-        }
-      } catch (err) {
-        console.error("Web3Forms delivery failed:", err);
-      }
-    }
+async function sendViaResend(
+  contact: CleanContact,
+  recipientEmail: string,
+  subject: string,
+  emailText: string,
+  emailHtml: string
+) {
+  const fromEmail = process.env.CONTACT_FROM_EMAIL || "Kamal Engineering <onboarding@resend.dev>";
 
-    // 3. FORMSPREE FALLBACK
-    if (!emailSent && process.env.FORMSPREE_FORM_ID) {
-      try {
-        console.log("Attempting email dispatch via Formspree...");
-        const res = await fetch(`https://formspree.io/f/${process.env.FORMSPREE_FORM_ID}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            company,
-            phone,
-            service,
-            message,
-            _subject: subject,
-          }),
-        });
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${process.env.RESEND_API_KEY}`,
+    },
+    body: JSON.stringify({
+      from: fromEmail,
+      to: [recipientEmail],
+      subject,
+      text: emailText,
+      html: emailHtml,
+      reply_to: contact.email,
+    }),
+  });
 
-        if (res.ok) {
-          console.log("Formspree delivery successful!");
-          emailSent = true;
-          serviceUsed = "Formspree";
-        } else {
-          const data = await res.json();
-          console.error("Formspree API error:", data);
-        }
-      } catch (err) {
-        console.error("Formspree delivery failed:", err);
-      }
-    }
+  const data = await readResponseBody(response);
 
-    // Fallback log if no active email delivery service is configured.
-    if (!emailSent) {
-      console.warn(
-        "⚠️ CONTACT FORM SUBMISSION NOT DELIVERED VIA EMAIL!\n" +
-        "To enable real email routing on Vercel, please set up one of the following environment variables:\n" +
-        "1. RESEND_API_KEY (Recommended: get a key from resend.com)\n" +
-        "2. WEB3FORMS_ACCESS_KEY (Get a free key from web3forms.com)\n" +
-        "3. FORMSPREE_FORM_ID (Get a form ID from formspree.io)\n" +
-        "Current submission payload:",
-        { name, company, phone, service, message }
-      );
-    }
+  if (!response.ok) {
+    throw new Error(getServiceError(data, "Resend could not deliver the enquiry."));
+  }
+}
+
+async function sendViaFormspree(contact: CleanContact, subject: string, emailText: string) {
+  const endpoint = process.env.FORMSPREE_ENDPOINT ||
+    (process.env.FORMSPREE_FORM_ID ? `https://formspree.io/f/${process.env.FORMSPREE_FORM_ID}` : "");
+
+  if (!endpoint) {
+    throw new Error("Formspree endpoint is missing.");
+  }
+
+  const response = await fetch(endpoint, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "application/json" },
+    body: JSON.stringify({
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      company: contact.company || "Not provided",
+      service: contact.service,
+      message: emailText,
+      _subject: subject,
+    }),
+  });
+
+  const data = await readResponseBody(response);
+
+  if (!response.ok) {
+    throw new Error(getServiceError(data, "Formspree could not deliver the enquiry."));
+  }
+}
+
+export async function POST(request: NextRequest) {
+  let payload: ContactPayload;
+
+  try {
+    payload = (await request.json()) as ContactPayload;
+  } catch {
+    return NextResponse.json(
+      { success: false, error: "Invalid form request. Please refresh the page and try again." },
+      { status: 400 }
+    );
+  }
+
+  const validation = validatePayload(payload);
+
+  if ("error" in validation) {
+    return NextResponse.json({ success: false, error: validation.error }, { status: 400 });
+  }
+
+  const contact = validation.contact;
+  const recipientEmail = process.env.CONTACT_TO_EMAIL || DEFAULT_RECIPIENT_EMAIL;
+  const submittedAt = new Intl.DateTimeFormat("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short",
+    timeZone: "Asia/Kolkata",
+  }).format(new Date());
+  const sourceUrl = request.headers.get("referer") || "Website contact form";
+  const clientIp = getClientIp(request);
+  const subject = `[Kamal Engineering] New enquiry from ${contact.name}`;
+  const emailText = buildEmailText(contact, submittedAt, sourceUrl, clientIp);
+  const emailHtml = buildEmailHtml(contact, submittedAt, sourceUrl, clientIp);
+
+  const deliveryServices: DeliveryService[] = [];
+
+  if (process.env.WEB3FORMS_ACCESS_KEY) {
+    deliveryServices.push({
+      name: "Web3Forms",
+      send: () => sendViaWeb3Forms(contact, subject, emailText, emailHtml),
+    });
+  }
+
+  if (process.env.RESEND_API_KEY) {
+    deliveryServices.push({
+      name: "Resend",
+      send: () => sendViaResend(contact, recipientEmail, subject, emailText, emailHtml),
+    });
+  }
+
+  if (process.env.FORMSPREE_ENDPOINT || process.env.FORMSPREE_FORM_ID) {
+    deliveryServices.push({
+      name: "Formspree",
+      send: () => sendViaFormspree(contact, subject, emailText),
+    });
+  }
+
+  if (deliveryServices.length === 0) {
+    console.error("Contact form email service is not configured.", {
+      recipientEmail,
+      name: contact.name,
+      email: contact.email,
+      phone: contact.phone,
+      service: contact.service,
+    });
 
     return NextResponse.json(
       {
-        success: true,
-        message: emailSent
-          ? `Enquiry delivered successfully via ${serviceUsed}.`
-          : "Enquiry logged successfully. Set up RESEND_API_KEY on Vercel for real-time email routing.",
-        delivered: emailSent,
-        service: serviceUsed,
+        success: false,
+        error:
+          "Email service is not configured yet. Please call or WhatsApp us directly, or configure WEB3FORMS_ACCESS_KEY in Vercel.",
       },
-      { status: 200 }
-    );
-  } catch (error) {
-    console.error("Contact form error:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
+      { status: 503 }
     );
   }
+
+  const errors: string[] = [];
+
+  for (const service of deliveryServices) {
+    try {
+      await service.send();
+      return NextResponse.json(
+        {
+          success: true,
+          message: `Thank you! Your enquiry has been sent to Kamal Engineering via ${service.name}.`,
+        },
+        { status: 200 }
+      );
+    } catch (error) {
+      const message = error instanceof Error ? error.message : "Unknown email delivery error.";
+      errors.push(`${service.name}: ${message}`);
+      console.error(`Contact form delivery failed via ${service.name}:`, message);
+    }
+  }
+
+  return NextResponse.json(
+    {
+      success: false,
+      error:
+        "We could not send the enquiry email right now. Please try again, or call/WhatsApp us directly.",
+      details: process.env.NODE_ENV === "development" ? errors : undefined,
+    },
+    { status: 502 }
+  );
 }
