@@ -3,149 +3,260 @@ import type { ServiceItem } from "@/lib/types";
 export const services: ServiceItem[] = [
   {
     id: "erection-dismantling",
+    slug: "erection-dismantling",
+    discipline: "Scaffolding",
     title: "Scaffolding Erection & Dismantling",
-    subtitle: "Full-Cycle Scaffolding Lifecycle Management",
-    icon: "M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4",
+    short:
+      "Full-cycle scaffold access — survey, load planning, erection, tagging, inspection and safe dismantling with material recovery.",
     description:
-      "We provide end-to-end scaffolding erection and dismantling services — from initial site survey and structural planning to safe dismantling and material recovery. Our trained erection crew ensures every scaffold structure is built to load specifications with proper bracing, anchoring, and tie-off points.",
-    useCases: [
-      "Building facades for new construction & renovation",
-      "Industrial plant maintenance and shutdowns",
-      "Bridge and infrastructure access solutions",
-      "Temporary access for inspection and painting",
-    ],
-    specifications: [
-      "IS 3696 (Part 1) compliant erection practices",
-      "Load calculation and structural verification before erection",
-      "Pre-use inspection of all material before deployment",
-      "Supervised dismantling with material sorting and recovery",
-    ],
+      "We take complete responsibility for the access scaffold lifecycle. Our supervisors carry out a site survey and load assessment, prepare a sketch and material take-off, mobilise a trained crew, and erect the structure to IS 3696 practice. Every completed scaffold is handed over with a Scafftag (green/red) system, and dismantling is done in reverse sequence with full material accounting so nothing is lost from your site.",
+    icon: "hammer",
+    image: "/images/service-erection.jpg",
     features: [
-      "Dedicated site supervisor for every project",
-      "Toolbox talk and safety briefing before erection begins",
-      "PPE compliance for all crew members",
-      "Flexible mobilization — minimum lead time for urgent requirements",
+      "Site survey, sketching and material take-off",
+      "Load class assessment — light, medium and heavy duty",
+      "Trained erectors working under full body harness at all times",
+      "Green / red Scafftag handover and daily inspection register",
+      "Sequenced dismantling with material reconciliation",
+      "Shutdown and turnaround mobilisation at short notice",
     ],
-    imageLabel: "[SITE PHOTO: Scaffolding crew during erection at project site]",
-    src: "/images/service-erection.jpg",
-  },
-  {
-    id: "h-frame",
-    title: "H-Frame Scaffolding",
-    subtitle: "Modular Frame System for Building Construction",
-    icon: "M4 5a1 1 0 011-1h4a1 1 0 011 1v7h4V5a1 1 0 011-1h4a1 1 0 011 1v14M4 19h16",
-    description:
-      "H-Frame scaffolding is one of the most widely used modular scaffolding systems in the construction industry. Comprising welded H-shaped frames connected with cross braces and planks, this system offers rapid assembly and excellent stability for mid-rise structures. It is ideal for bricklaying, plastering, painting, and facade finishing work.",
-    useCases: [
-      "Building facades for brickwork and plastering",
-      "Painting and exterior finishing for mid-rise structures",
-      "Residential and commercial building construction",
-      "Renovation and repair access for occupied buildings",
+    bestFor: [
+      "Refinery & petrochemical turnarounds",
+      "Plant maintenance shutdowns",
+      "Building construction access",
+      "Bridge and infrastructure works",
     ],
-    specifications: [
-      "Standard frame sizes: 1.5m (W) × 1.2m / 1.5m / 1.8m (H)",
-      "MS tubular construction with welded joints",
-      "Cross bracing with drop-forged couplers",
-      "Galvanized finish for corrosion resistance",
-      "Compatible with standard steel planks and timber boards",
+    specs: [
+      { label: "Standard", value: "IS 3696 (Part 1) practice" },
+      { label: "Crew", value: "Supervisor + erectors + helpers" },
+      { label: "Handover", value: "Scafftag + inspection checklist" },
     ],
-    features: [
-      "Fast assembly — fewer components than tube & coupler systems",
-      "Cost-effective for straight-line facades",
-      "High rigidity and load-bearing capacity",
-      "Easy to transport and stack for multi-location deployment",
-    ],
-    imageLabel: "[PROJECT PHOTO: H-Frame scaffolding on building facade]",
-    src: "/images/service-hframe.jpg",
-  },
-  {
-    id: "tubular",
-    title: "Tubular (Tube & Coupler) Scaffolding",
-    subtitle: "Flexible System for Complex and Irregular Structures",
-    icon: "M13 10V3L4 14h7v7l9-11h-7z",
-    description:
-      "Tube and coupler scaffolding is the most versatile scaffolding system available. Using steel tubes connected with right-angle, swivel, and sleeve couplers, this system can be configured to virtually any geometry — making it the go-to choice for industrial plants, bridges, chimneys, and structures with irregular shapes. The system's flexibility allows adaption to any layout without compromising on load-bearing capacity.",
-    useCases: [
-      "Industrial plants with complex piping and equipment layouts",
-      "Bridges, flyovers, and infrastructure projects",
-      "Refineries, power plants, and chemical facilities",
-      "Heritage structures and architecturally complex buildings",
-      "Stadiums and large-span structures",
-    ],
-    specifications: [
-      "48.3mm OD × 3.2mm / 4.0mm wall thickness MS/GI tubes",
-      "Drop-forged or pressed steel couplers (BS 1139 / IS 2750 compliant)",
-      "Right-angle, swivel, and sleeve couplers for any angle connection",
-      "Load capacity: up to 6.25 kN per leg (standard configuration)",
-      "Tube lengths: 0.5m to 6.4m (standard), custom lengths available",
-    ],
-    features: [
-      "Adaptable to any geometry — irregular shapes, curves, slopes",
-      "Component-level inspection and replacement possible",
-      "Heavy-duty load capacity for industrial applications",
-      "Compatible with other systems for hybrid scaffolding solutions",
-    ],
-    imageLabel: "[PROJECT PHOTO: Tubular scaffolding at industrial plant or bridge]",
-    src: "/images/service-tubular.jpg",
   },
   {
     id: "cuplock",
-    title: "Cuplock Scaffolding",
-    subtitle: "Heavy-Duty System for High-Rise & Industrial Applications",
-    icon: "M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4",
+    slug: "cuplock",
+    discipline: "Scaffolding",
+    title: "Cuplock Scaffolding System",
+    short:
+      "Node-point modular system for heavy-duty industrial and high-rise access — fastest erection cycle per man-hour.",
     description:
-      "Cuplock scaffolding is a heavy-duty, high-capacity system designed for demanding applications including high-rise construction, industrial shutdowns, and load-bearing formwork support. The unique cup-and-blade locking mechanism allows up to 4 horizontals to be connected at a single node point, providing unmatched speed of erection and structural integrity with fewer loose components.",
-    useCases: [
-      "High-rise building construction and facade work",
-      "Industrial shutdown and maintenance access",
-      "Formwork shuttering support for heavy concrete pours",
-      "Staircase towers, loading bays, and access towers",
-      "Petrochemical, power, and steel plant applications",
-    ],
-    specifications: [
-      "Standard vertical standards: 48.3mm OD × 3.2mm / 4.0mm wall thickness",
-      "Unique top-cup and bottom-cup node point locking mechanism",
-      "Ledger blade ends forged for secure cup engagement",
-      "Load capacity: 40 kN per vertical standard (braced at 2m intervals)",
-      "Bay sizes: 0.6m to 2.4m (lift height), 0.6m to 3.0m (bay length)",
-      "Hot-dip galvanized finish standard",
-    ],
+      "Cuplock is our preferred system for industrial plants and high-rise work. The top-cup / bottom-cup node locks up to four ledgers in a single hammer blow, so erection is substantially faster than tube & coupler and needs fewer loose fittings to control. Galvanised standards and ledgers resist corrosion in coastal and chemical environments — an important consideration for Gujarat's plant belt.",
+    icon: "cuplock",
+    image: "/images/service-cuplock.jpg",
     features: [
-      "4-way connection at every node — no loose fittings",
-      "40% faster erection compared to tube & coupler systems",
-      "Highest load capacity among modular scaffolding systems",
-      "Reduced material inventory — fewer components needed",
+      "Galvanised standards in 1.0m, 1.5m, 2.0m, 2.5m and 3.0m lengths",
+      "Ledgers from 0.6m to 2.5m at standard 500mm lift intervals",
+      "Base jacks and U-jacks for uneven ground and formwork support",
+      "Integrated ladder access bays and stair towers",
+      "Doubles as birdcage support and shoring for slab formwork",
+      "Minimal loose fittings — lower material loss on site",
     ],
-    imageLabel: "[PROJECT PHOTO: Cuplock scaffolding at high-rise or industrial site]",
-    src: "/images/service-cuplock.jpg",
+    bestFor: [
+      "Refinery columns and vessel access",
+      "High-rise external access",
+      "Slab shoring and birdcage decks",
+      "Boiler and furnace internals",
+    ],
+    specs: [
+      { label: "Node", value: "Top-cup / bottom-cup, 4-way" },
+      { label: "Finish", value: "Hot-dip galvanised / painted" },
+      { label: "Lift", value: "500mm module" },
+    ],
   },
   {
-    id: "supply-service",
-    title: "Scaffolding Supply & Service (Rent / Sale)",
-    subtitle: "Material Supply with On-Site Technical Support",
-    icon: "M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4",
+    id: "tubular",
+    slug: "tubular",
+    discipline: "Scaffolding",
+    title: "Tubular (Tube & Coupler) Scaffolding",
+    short:
+      "Maximum geometric freedom for irregular structures, pipe racks, cantilevers and one-off industrial configurations.",
     description:
-      "We supply a comprehensive range of scaffolding materials on rental or outright sale basis, supported by our technical team for on-site guidance. Our inventory includes H-Frames, MS/ GI tubes, couplers of all types, cuplock components, steel planks, base jacks, and all accessories. Every item undergoes quality inspection before dispatch, and our technical team is available for installation support at your site.",
-    useCases: [
-      "Contractors needing material only (self-execution with own labor)",
-      "Short-term project requirements with flexible rental periods",
-      "Material top-up for ongoing projects running short of stock",
-      "Purchase of new scaffolding material for long-term asset building",
-    ],
-    specifications: [
-      "Full range: H-Frames, tubes (MS/GI), couplers, cuplock standards & ledgers",
-      "Steel planks (225mm & 450mm widths), base jacks, U-head jacks",
-      "All material inspected and tagged before dispatch",
-      "Rental: flexible periods — weekly, monthly, or project-duration basis",
-      "Sale: competitive pricing with bulk-order discounts",
-    ],
+      "Where a modular system cannot follow the geometry, tube and coupler takes over. Using MS pipes with right-angle, swivel and sleeve couplers, we can build to any angle, span any obstruction and cantilever off existing steelwork. This is the system we reach for around pipe racks, under bridge soffits, inside vessels and anywhere the structure refuses to be rectangular.",
+    icon: "pipe",
+    image: "/images/service-tubular.jpg",
     features: [
-      "Delivery to project site across operational regions",
-      "On-site technical support for correct installation",
-      "Material maintenance, repair, and refurbishment service",
-      "Inventory availability updates for quick lead-time confirmation",
+      "MS pipes with right-angle, swivel, sleeve and putlog couplers",
+      "Cantilever, suspended and bracket scaffolds off existing steel",
+      "Confined-space and vessel-internal platforming",
+      "Bridge soffit, pier and underslung access",
+      "Custom raking and bridging over live plant equipment",
+      "Ties and bracing designed to the specific structure",
     ],
-    imageLabel: "[SITE PHOTO: Scaffolding material yard / inventory display]",
-    src: "/images/service-rent-sale.jpg",
+    bestFor: [
+      "Pipe rack and duct access",
+      "Bridge soffits and piers",
+      "Vessel and column internals",
+      "Irregular or curved structures",
+    ],
+    specs: [
+      { label: "Tube", value: "MS pipe, 48.3mm OD" },
+      { label: "Couplers", value: "Right-angle, swivel, sleeve, putlog" },
+      { label: "Strength", value: "Site-specific tie & bracing plan" },
+    ],
+  },
+  {
+    id: "h-frame",
+    slug: "h-frame",
+    discipline: "Scaffolding",
+    title: "H-Frame Scaffolding",
+    short:
+      "Pre-fabricated frame system for fast, repeatable facade access on buildings — lowest cost per square metre.",
+    description:
+      "For straight-run building facades, H-Frame is the most economical answer. Pre-welded frames with cross-braces stack quickly, need very little skilled labour, and give a consistent working width. We use it for plastering, brickwork, painting and finishing on residential and commercial buildings, and as a mobile tower for internal work.",
+    icon: "frame",
+    image: "/images/service-hframe.jpg",
+    features: [
+      "Pre-welded frames with locking cross-braces",
+      "Adjustable base plates and castor wheels for mobile towers",
+      "MS challi and metal decks for a full working platform",
+      "Very fast stacking — low skilled-labour requirement",
+      "Guardrails, mid-rails and toe boards fitted as standard",
+      "Ideal for repetitive straight-run facades",
+    ],
+    bestFor: [
+      "Residential & commercial facades",
+      "Plastering and painting access",
+      "Internal mobile towers",
+      "Warehouse and shed work",
+    ],
+    specs: [
+      { label: "Frame", value: "Standard 1.7m / 2.0m heights" },
+      { label: "Bay", value: "1.8m – 2.4m typical" },
+      { label: "Deck", value: "MS challi / metal plank" },
+    ],
+  },
+  {
+    id: "industrial-painting",
+    slug: "industrial-painting",
+    discipline: "Painting",
+    title: "Industrial Protective Painting",
+    short:
+      "Surface preparation and protective coating for tanks, structures, pipelines and plant equipment — with DFT records.",
+    description:
+      "Coating fails at the surface preparation stage, not the paint stage. We prepare to the specified standard — power tool cleaning to St 2/St 3 or abrasive blasting to Sa 2½ — then apply the client's specified system, typically an epoxy primer, epoxy intermediate and polyurethane finish. Wet film and dry film thickness are checked and recorded at each coat, so you get a documented coating history rather than a promise.",
+    icon: "brush",
+    image: "/images/service-painting.jpg",
+    features: [
+      "Surface preparation: power tool cleaning and abrasive blasting",
+      "Epoxy primer, intermediate and PU finish systems",
+      "Airless spray, conventional spray, brush and roller application",
+      "WFT / DFT measurement recorded coat by coat",
+      "Anti-corrosive, heat-resistant and chemical-resistant systems",
+      "Structural steel, tanks, pipelines and equipment",
+    ],
+    bestFor: [
+      "Storage tank internals & externals",
+      "Structural steel and pipe racks",
+      "Plant equipment and vessels",
+      "Line marking and colour coding",
+    ],
+    specs: [
+      { label: "Prep", value: "St 2 / St 3 / Sa 2½" },
+      { label: "System", value: "Epoxy + PU as per client spec" },
+      { label: "QC", value: "DFT gauge readings logged" },
+    ],
+  },
+  {
+    id: "thermal-insulation",
+    slug: "thermal-insulation",
+    discipline: "Insulation",
+    title: "Thermal & Cold Insulation",
+    short:
+      "Hot and cold insulation for piping, vessels and equipment with aluminium or GI cladding, finished to spec.",
+    description:
+      "Heat loss costs money every hour a line runs uninsulated. We execute hot insulation using rockwool, mineral wool, ceramic wool and calcium silicate, and cold insulation using PUF, nitrile rubber and thermocol systems with proper vapour barriers. Everything is finished with aluminium or GI sheet cladding, properly bird-mouthed at elbows and banded at the specified pitch — because neat cladding is what actually keeps water out.",
+    icon: "layers",
+    image: "/images/service-insulation.jpg",
+    features: [
+      "Hot insulation: rockwool, mineral wool, ceramic wool, calcium silicate",
+      "Cold insulation: PUF, nitrile rubber, thermocol with vapour barrier",
+      "Aluminium and GI sheet cladding, fabricated on site",
+      "Elbows, tees, valves and flanges — removable box covers",
+      "Personnel protection and acoustic insulation",
+      "Banding at specified pitch with sealed overlaps",
+    ],
+    bestFor: [
+      "Process piping and steam lines",
+      "Vessels, columns and exchangers",
+      "Chilled water and refrigeration lines",
+      "Boiler and furnace ducting",
+    ],
+    specs: [
+      { label: "Hot", value: "Rockwool / LRB / ceramic wool" },
+      { label: "Cold", value: "PUF / nitrile with vapour barrier" },
+      { label: "Cladding", value: "Aluminium 0.5–0.8mm / GI" },
+    ],
+  },
+  {
+    id: "supply-hire",
+    slug: "supply-hire",
+    discipline: "Scaffolding",
+    title: "Material Supply & Hire",
+    short:
+      "Scaffolding material on monthly rent or outright sale — inspected, tagged and delivered to your site.",
+    description:
+      "If you have your own crew and only need material, we supply on monthly hire or on sale. Stock is inspected before despatch, bent or damaged items are pulled out of circulation, and everything is delivered with a signed challan showing item-wise counts so reconciliation at the end of hire is straightforward. Top-up deliveries during a running job are handled on the same rate.",
+    icon: "truck",
+    image: "/images/yard-materials.jpg",
+    features: [
+      "Cuplock standards, ledgers, base jacks and U-jacks",
+      "MS pipes, couplers, clamps and joint pins",
+      "H-frames, cross braces, MS challi and metal decks",
+      "Adjustable props, spans and shuttering accessories",
+      "Item-wise delivery challan and return reconciliation",
+      "Monthly hire or outright purchase",
+    ],
+    bestFor: [
+      "Contractors with in-house erection crew",
+      "Short-term top-up requirements",
+      "Long-duration site hire",
+      "One-time material purchase",
+    ],
+    specs: [
+      { label: "Basis", value: "Monthly hire or sale" },
+      { label: "Delivery", value: "Item-wise signed challan" },
+      { label: "Condition", value: "Pre-despatch inspection" },
+    ],
+  },
+];
+
+export function getService(slug: string) {
+  return services.find((s) => s.slug === slug);
+}
+
+export const disciplines: Array<{
+  name: "Scaffolding" | "Painting" | "Insulation";
+  tagline: string;
+  blurb: string;
+  icon: string;
+  image: string;
+  href: string;
+}> = [
+  {
+    name: "Scaffolding",
+    tagline: "Safe access, engineered",
+    blurb:
+      "Cuplock, tube & coupler and H-Frame systems erected, tagged, inspected and dismantled by trained crews.",
+    icon: "cuplock",
+    image: "/images/service-cuplock.jpg",
+    href: "/services#erection-dismantling",
+  },
+  {
+    name: "Painting",
+    tagline: "Protection that lasts",
+    blurb:
+      "Surface preparation and protective coating systems with documented DFT readings at every coat.",
+    icon: "brush",
+    image: "/images/service-painting.jpg",
+    href: "/services#industrial-painting",
+  },
+  {
+    name: "Insulation",
+    tagline: "Energy kept where it belongs",
+    blurb:
+      "Hot and cold insulation with aluminium or GI cladding, finished neatly and banded to specification.",
+    icon: "layers",
+    image: "/images/service-insulation.jpg",
+    href: "/services#thermal-insulation",
   },
 ];
